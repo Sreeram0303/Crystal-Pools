@@ -285,7 +285,7 @@ export default function TurnkeyProjects() {
 
       {/* 5. The Footer / Call to Action (The Conversion) */}
       <section className="h-[50vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 bg-[#fbfbfb] dark:bg-[#060F1A] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/services/swimming-pool.jpg')] bg-cover bg-center opacity-[0.03] dark:opacity-10 grayscale pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('/images/services/hub/swimming-pool.png')] bg-cover bg-center opacity-[0.03] dark:opacity-10 grayscale pointer-events-none"></div>
         <div className="relative z-10 flex flex-col items-center">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0a5c86] dark:text-white mb-6 tracking-tight">
             Transform Your Vision into Reality
