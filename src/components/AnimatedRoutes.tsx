@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useLenis } from './SmoothScroll';
 import { AnimatePresence, motion } from 'motion/react';
@@ -37,7 +38,7 @@ function PageFallback() {
   );
 }
 
-const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
