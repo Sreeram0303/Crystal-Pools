@@ -43,9 +43,9 @@ export const IMAGES = {
   // ── About page ──────────────────────────────────────────────────────────
   about: {
     /** Full-screen hero — aerial / infinity pool at sunset. 1920×1080 recommended. */
-    hero:         '/images/about/hero.jpg',
+    hero:         '/images/about/hero.png',
     /** Pool construction / site detail shot. 1200×800 recommended. */
-    construction: '/images/about/pool-construction.jpg',
+    construction: '/images/about/pool-construction.png',
   },
 
   // ── Services ─────────────────────────────────────────────────────────────
@@ -63,11 +63,11 @@ export const IMAGES = {
   services: {
     // ── PoolAnimatedSection  (public/images/services/hub/) ───────────────────
     /** Flagship pool photo used in PoolAnimatedSection. 1600×1200 recommended. */
-    swimmingPool:       '/images/services/hub/swimming-pool.jpg',
+    swimmingPool:       '/images/services/hub/swimming-pool.png',
 
     // ── Turnkey Projects  (public/images/services/turnkey-projects/) ─────────
     /** Full-bleed banner. 2000×900 recommended. */
-    turnkeyHero:        '/images/services/turnkey-projects/hero.jpg',
+    turnkeyHero:        '/images/services/turnkey-projects/hero.png',
 
     // ── Accessories  (public/images/services/accessories/) ───────────────────
     /** Full-bleed accessories hero. Drop hero.png/jpg here to activate. */
@@ -79,7 +79,7 @@ export const IMAGES = {
 
     // ── Renovation  (public/images/services/renovation/) ─────────────────────
     /** Full-bleed renovation hero. 2000×900 recommended. */
-    renovationHero:     '/images/services/renovation/hero.jpg',
+    renovationHero:     '/images/services/renovation/hero.png',
     /** Sticky grid panels — 1.png (large), 2.png, 3.png (stacked). */
     renovation:         [
       '/images/services/renovation/1.png',
@@ -107,10 +107,10 @@ export const IMAGES = {
     commercial:   '/images/pool-types/commercial.jpg',
     recreational: '/images/pool-types/recreational.jpg',
     competition:  '/images/pool-types/competition.jpg',
-    vanishingEdge:'/images/pool-types/vanishing-edge.jpg',
-    overflow:     '/images/pool-types/overflow.jpg',
-    skimmer:      '/images/pool-types/skimmer.jpg',
-    readymade:    '/images/pool-types/readymade.jpg',
+    vanishingEdge:'/images/pool-types/vanishing-edge.png',
+    overflow:     '/images/pool-types/overflow.png',
+    skimmer:      '/images/pool-types/skimmer.png',
+    readymade:    '/images/pool-types/readymade.png',
   },
 
   // ── Gallery ──────────────────────────────────────────────────────────────
