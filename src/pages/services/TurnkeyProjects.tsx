@@ -1,0 +1,308 @@
+﻿import { motion } from 'motion/react';
+import { Compass, Droplets, PenTool, Wrench, Settings, RotateCcw, MapPin, RefreshCw } from 'lucide-react';
+import { usePageMeta } from '../../hooks/usePageMeta';
+import { Link } from 'react-router-dom';
+import { IMAGES } from '../../config/images';
+
+export default function TurnkeyProjects() {
+  const benefits = [
+    {
+      title: "Accelerated Project Rollouts",
+      description: "Seamless scheduling and in-house coordination mean swift project lifecycles."
+    },
+    {
+      title: "Consistent, High-Caliber Quality",
+      description: "A single team ensures uniform standards of excellence from the initial sketch to the final polish."
+    },
+    {
+      title: "Cost-Effectiveness",
+      description: "We deliver highly effective, economical solutions within your given cost-and-time framework."
+    },
+    {
+      title: "Greater Convenience",
+      description: "You deal with one dedicated partner for design, engineering, construction, and beyond."
+    }
+  ];
+
+  const scopeItems = [
+    {
+      title: "Design",
+      description: "Aesthetic visions and robust hydraulic plans.",
+      icon: Compass,
+      color: "text-rose-500",
+      borderColor: "border-rose-400",
+      dotColor: "text-rose-400"
+    },
+    {
+      title: "Engineering",
+      description: "Advanced excavation to total structural works.",
+      icon: Wrench,
+      color: "text-amber-500",
+      borderColor: "border-amber-400",
+      dotColor: "text-amber-400"
+    },
+    {
+      title: "Finishing",
+      description: "Premium mosaics and luxurious accessories.",
+      icon: PenTool,
+      color: "text-green-500",
+      borderColor: "border-green-400",
+      dotColor: "text-green-400"
+    },
+    {
+      title: "Filtration",
+      description: "Energy-efficient treatment and sanitation.",
+      icon: Droplets,
+      color: "text-teal-500",
+      borderColor: "border-teal-400",
+      dotColor: "text-teal-400"
+    },
+    {
+      title: "Equipment",
+      description: "Modern heating and mechanical systems.",
+      icon: Settings,
+      color: "text-blue-500",
+      borderColor: "border-blue-400",
+      dotColor: "text-blue-400"
+    },
+    {
+      title: "Support",
+      description: "Lifecycle maintenance and spares supply.",
+      icon: RotateCcw,
+      color: "text-indigo-500",
+      borderColor: "border-indigo-400",
+      dotColor: "text-indigo-400"
+    }
+  ];
+
+  return (
+    <div className="bg-[#fbfbfb] dark:bg-[#060F1A] min-h-screen text-slate-900 dark:text-slate-50 transition-colors duration-500">
+      {/* 1. Hero */}
+      <section className="relative w-full h-screen min-h-160 overflow-hidden bg-black">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={IMAGES.services.turnkeyHero}
+            alt="Turnkey pool project"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Left vignette */}
+        <div className="absolute inset-0 z-10 bg-linear-to-r from-black/85 via-black/50 to-transparent" />
+        {/* Bottom vignette for badge strip */}
+        <div className="absolute inset-x-0 bottom-0 h-48 z-10 bg-linear-to-t from-black/80 to-transparent" />
+
+        {/* Left-aligned content */}
+        <div className="absolute inset-0 z-20 flex flex-col justify-center px-8 sm:px-14 md:px-20 lg:px-28 pt-24">
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-xs sm:text-sm font-bold tracking-[0.35em] uppercase text-[#f9c80e] mb-3 md:mb-4"
+            >
+              Crafting
+            </motion.p>
+
+            {/* Main heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-display font-bold leading-none tracking-tight"
+            >
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white dark:text-brand-gold uppercase">
+                Unforgettable
+              </span>
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic font-normal normal-case text-[#f9c80e]">
+                Aquatic
+              </span>
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic font-normal normal-case text-[#f9c80e]">
+                Experiences.
+              </span>
+            </motion.h1>
+
+            {/* Gold rule */}
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="origin-left h-0.5 w-16 bg-[#f9c80e] mt-6 mb-6"
+            />
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="text-base sm:text-lg text-white/80 leading-relaxed max-w-md"
+            >
+              Premier Turnkey Swimming Pool Construction &amp; Total Lifecycle Support across{' '}
+              <span className="text-[#f9c80e]">India.</span>
+            </motion.p>
+          </div>
+        </div>
+
+        {/* Bottom badge strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="absolute inset-x-0 bottom-0 z-20 px-8 sm:px-14 md:px-20 lg:px-28 pb-8 md:pb-10"
+        >
+          <div className="flex items-center divide-x divide-white/20">
+            {[
+              { icon: PenTool,   label: 'Design &\nEngineering' },
+              { icon: Wrench,    label: 'Construction\nExcellence' },
+              { icon: RefreshCw, label: 'Lifecycle\nSupport' },
+              { icon: MapPin,    label: 'Pan India\nPresence' },
+            ].map(({ icon: Icon, label }, i) => (
+              <div key={i} className="flex items-center gap-3 px-5 first:pl-0">
+                <Icon className="w-5 h-5 text-[#f9c80e] shrink-0 stroke-[1.5]" />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white/80 whitespace-pre-line leading-tight">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Scroll cue */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center opacity-0 pointer-events-none" />
+      </section>
+
+      {/* 2. The Turnkey Philosophy (Problem/Solution) */}
+      <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
+          <div className="relative">
+            <div className="md:sticky md:top-32">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0a5c86] dark:text-white mb-6 tracking-tight">
+                Total Aquatic Solutions.
+                <br />
+                <span className="font-serif italic text-cyan-700 dark:text-brand-gold font-normal">Unifying Expertise, Eliminating Complexity.</span>
+              </h2>
+              <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-md">
+                Why navigate the complexities of multiple vendors for your aquatic vision when you can partner with a single, reliable entity? Crystal Pools offers integrated, turnkey solutions that eliminate multivendor dependency. By choosing an end-to-end partnership, we optimize every facet of your project.
+                <br /><br />
+                Our integrated approach directly leads to:
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col border-t border-slate-200 dark:border-slate-800">
+            {benefits.map((benefit, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="p-8 border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-300 group"
+              >
+                <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-3 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">{benefit.title}</h3>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. The Scope of Work (The Details) - Infographic Style */}
+      <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white dark:bg-[#09090b]">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-24">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0a5c86] dark:text-white mb-6 tracking-tight">
+              Our Full-Spectrum <span className="font-serif italic text-cyan-700 dark:text-brand-gold font-normal">Project Scope</span>
+            </h2>
+            <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              Our partnership encompasses anything and everything related to swimming pools, from the initial consultation to decommissioning. We manage the entire lifecycle with single-point accountability.
+            </p>
+          </div>
+
+          {/* Desktop/Tablet Infographic */}
+          <div className="hidden lg:flex w-full relative justify-between items-start pt-10">
+            {scopeItems.map((item, index) => {
+              const isTop = index % 2 === 0;
+              return (
+                <div key={index} className="flex-1 relative flex flex-col items-center group">
+                  {/* 1. Graphic Area */}
+                  <div className="relative w-full h-44 flex items-center justify-center">
+                    {/* The Dashed Wave */}
+                    {isTop ? (
+                      <div className={`absolute top-0 -left-[1px] w-[calc(100%+2px)] h-1/2 border-t-[2px] border-l-[2px] border-r-[2px] border-dashed ${item.borderColor} rounded-t-[120px] transition-colors duration-500`} style={{ borderBottom: 'none' }}></div>
+                    ) : (
+                      <div className={`absolute bottom-0 -left-[1px] w-[calc(100%+2px)] h-1/2 border-b-[2px] border-l-[2px] border-r-[2px] border-dashed ${item.borderColor} rounded-b-[120px] transition-colors duration-500`} style={{ borderTop: 'none' }}></div>
+                    )}
+
+                    {/* Connection Dots (Start / End) */}
+                    {index === 0 && (
+                       <div className={`absolute left-[-5px] top-1/2 -translate-y-[1px] w-2.5 h-2.5 rounded-full border bg-white dark:bg-[#09090b] ${item.borderColor} z-20`}></div>
+                    )}
+                    {index === scopeItems.length - 1 && (
+                       <div className={`absolute right-[calc(-5px+2px)] top-1/2 -translate-y-[1px] w-2.5 h-2.5 rounded-full border bg-white dark:bg-[#09090b] ${item.borderColor} z-20`}></div>
+                    )}
+
+                    {/* The Center Icon Circle */}
+                    <div className="z-10 w-28 h-28 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center relative shadow-sm cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300">
+                       {/* Subtle inner dashed indicator for "creativity" look */}
+                       <div className="absolute inset-2 border border-slate-100 dark:border-slate-700 rounded-full transition-colors duration-300 group-hover:border-slate-200 dark:group-hover:border-slate-600"></div>
+                       <item.icon className={`w-10 h-10 stroke-[1] ${item.color} transition-transform duration-500 group-hover:scale-110`} />
+                    </div>
+                  </div>
+
+                  {/* 2. Text Content */}
+                  <div className="text-center px-4 mt-8">
+                    <h3 className="text-[13px] font-bold text-slate-800 dark:text-slate-100 uppercase tracking-widest mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed uppercase tracking-wider max-w-[140px] mx-auto">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="lg:hidden flex flex-col space-y-12 relative max-w-sm mx-auto before:absolute before:inset-0 before:ml-12 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-transparent before:via-slate-200 before:to-transparent">
+             {scopeItems.map((item, index) => (
+                <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                   <div className="flex items-center justify-center w-24 h-24 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 relative">
+                     <div className="absolute inset-2 border border-slate-100 dark:border-slate-700 rounded-full"></div>
+                     <item.icon className={`w-8 h-8 stroke-[1] ${item.color}`} />
+                   </div>
+                   <div className="w-[calc(100%-7rem)] md:w-[calc(50%-4rem)] p-4 rounded bg-slate-50 dark:bg-[#0a111a] shadow-sm border border-slate-100 dark:border-slate-800">
+                     <h3 className="font-bold text-sm text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-2">{item.title}</h3>
+                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed uppercase">{item.description}</p>
+                   </div>
+                </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. The Footer / Call to Action (The Conversion) */}
+      <section className="h-[50vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 bg-[#fbfbfb] dark:bg-[#060F1A] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/services/swimming-pool.jpg')] bg-cover bg-center opacity-[0.03] dark:opacity-10 grayscale pointer-events-none"></div>
+        <div className="relative z-10 flex flex-col items-center">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#0a5c86] dark:text-white mb-6 tracking-tight">
+            Transform Your Vision into Reality
+          </h2>
+          <p className="text-lg text-slate-700 dark:text-slate-300 mb-10 max-w-2xl leading-relaxed">
+            Do not settle for the ordinary. Engage the trustworthy team at Crystal Pools to get on-time, on-budget project delivery from initial concept to handover and beyond, with absolute peace of mind at every stage.
+          </p>
+          <Link 
+            to="/contact-swimming-pool-contractor#inquiry" 
+            className="group relative inline-flex items-center justify-center bg-black dark:bg-white text-white dark:text-slate-900 px-8 py-4 uppercase tracking-[0.2em] text-sm hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors duration-300 overflow-hidden"
+          >
+            <span className="relative z-10 pt-[2px] group-hover:text-white transition-colors duration-300">Start Your Project</span>
+            <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-cyan-900 dark:bg-[#0a5c86] transition-all duration-300 ease-out z-0"></div>
+            <span className="relative z-10 pt-[2px] ml-3 mt-[-2px] group-hover:text-white transition-colors duration-300">{`→`}</span>
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}

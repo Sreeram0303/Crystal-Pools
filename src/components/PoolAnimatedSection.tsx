@@ -1,0 +1,334 @@
+﻿import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import BubbleBackground from './BubbleBackground';
+import { IMAGES } from '../config/images';
+
+const DATA = [
+  {
+    title: "Dive into Excellence",
+    desc: "Discover our diverse range of luxury pools, engineered for beauty, durability, and a pristine swimming experience. Scroll seamlessly to explore our architectural designs.",
+    img: IMAGES.services.swimmingPool
+  },
+  {
+    id: 'private-swimming-pools',
+    title: 'PRIVATE SWIMMING POOLS',
+    desc: 'Private swimming pools are usually smaller than public pools, offering personal retreats tailored to your individual style and available space. We focus on bespoke designs.',
+    img: IMAGES.poolTypes.private
+  },
+  {
+    id: 'commercial-swimming-pools',
+    title: 'COMMERCIAL SWIMMING POOLS',
+    desc: 'Crystal pool has expertise with Commercial swimming pools for hotels, resorts, and apartment complexes. Designed for high traffic and maximum durability.',
+    img: IMAGES.poolTypes.commercial
+  },
+  {
+    id: 'recreation-swimming-pools',
+    title: 'RECREATION SWIMMING POOLS',
+    desc: 'Public pools are often part of a larger leisure center or recreational complex featuring lazy rivers, wave pools, and splash pads.',
+    img: IMAGES.poolTypes.recreational
+  },
+  {
+    id: 'competition-swimming-pools',
+    title: 'COMPETITION SWIMMING POOLS',
+    desc: 'A pool may be referred to as fast or slow, depending on its physical layout. We build Olympic-grade pools with precise dimensions and wave-reducing gutters.',
+    img: IMAGES.poolTypes.competition
+  },
+  {
+    id: 'vanishing-edge-swimming-pools',
+    title: 'VANISHING EDGE SWIMMING POOLS',
+    desc: 'Vanishing edge pool is a swimming or reflecting pool that produces a visual effect of water extending to the horizon. Perfect for scenic locations.',
+    img: IMAGES.poolTypes.vanishingEdge
+  },
+  {
+    id: 'overflow-type-swimming-pools',
+    title: 'OVERFLOW TYPE SWIMMING POOLS',
+    desc: 'A perimeter-overflow pool is a type of vanishing-edge pool designed so that water spills over all four walls, creating a flawless mirror surface.',
+    img: IMAGES.poolTypes.overflow
+  },
+  {
+    id: 'skimmer-type-swimming-pools',
+    title: 'SKIMMER TYPE SWIMMING POOLS',
+    desc: 'A skimmer swimming pool is designed to pull water into the system from the pools surface with a skimming action. Highly efficient and cost-effective.',
+    img: IMAGES.poolTypes.skimmer
+  },
+  {
+    id: 'readymade-swimming-pool',
+    title: 'READYMADE SWIMMING POOL',
+    desc: 'Prefabs and readymade pools offer quick installation. Our service department is available for all equipment repair and replace as well as new readymade installs.',
+    img: IMAGES.poolTypes.readymade
+  }
+];
+
+const DesktopView = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 400, damping: 40, mass: 0.5 });
+
+  const steps = DATA.length; 
+  const points = steps * 2 - 1; 
+
+  const inputs = [];
+  const scales = [];
+  const rotationsY = [];
+  const rotationsX = [];
+  const rotationsZ = [];
+  const xPositions = [];
+  const yPositions = [];
+
+  for (let i = 0; i < points; i++) {
+    inputs.push(i / (points - 1));
+    const stepIndex = Math.floor(i / 2);
+    
+    if (i % 2 === 0) {
+      // Settled State
+      scales.push(1);
+      rotationsY.push(0);
+      rotationsX.push(0);
+      rotationsZ.push(0);
+      xPositions.push(stepIndex % 2 === 0 ? 55 : 5);
+      yPositions.push(0);
+    } else {
+      // Transition State - Detaches, shrinks slightly, moves diagonally downward
+      scales.push(0.65); 
+      rotationsY.push(stepIndex % 2 === 0 ? -25 : 25);
+      rotationsX.push(15);
+      rotationsZ.push(stepIndex % 2 === 0 ? -8 : 8);
+      xPositions.push(30);
+      yPositions.push(35); // Visually "downward"
+    }
+  }
+
+  const imageLeftRaw = useTransform(smoothProgress, inputs, xPositions);
+  const imageLeft = useTransform(imageLeftRaw, (v) => `${v}%`);
+  const imageYRaw = useTransform(smoothProgress, inputs, yPositions);
+  const imageY = useTransform(imageYRaw, (v) => `${v}vh`);
+  const imageScale = useTransform(smoothProgress, inputs, scales);
+  const imageRotateY = useTransform(smoothProgress, inputs, rotationsY);
+  const imageRotateX = useTransform(smoothProgress, inputs, rotationsX);
+  const imageRotateZ = useTransform(smoothProgress, inputs, rotationsZ);
+
+  const stepSize = 1 / (steps - 1);
+
+  return (
+    <div ref={containerRef} style={{ height: `${steps * 100}vh` }} className="relative bg-[#f8fafc] dark:bg-[#060F1A] transition-colors duration-500 w-full">
+      <div className="sticky top-0 h-[100vh] w-full overflow-hidden flex items-center" style={{ perspective: 1500 }}>
+        {/* Background Bubbles */}
+        <div className="absolute inset-0 z-0 opacity-50">
+          <BubbleBackground />
+        </div>
+        
+        {/* Texts */}
+        {DATA.map((item, i) => (
+
+          <TextBlock 
+            key={i} 
+            item={item} 
+            index={i} 
+            progress={smoothProgress} 
+            stepSize={stepSize}
+          />
+        ))}
+
+        {/* The Moving Image Block */}
+        <motion.div 
+          className="absolute h-[60vh] rounded-[24px] overflow-hidden will-change-transform z-10"
+          style={{ 
+            left: imageLeft, 
+            y: imageY,
+            width: '40%',
+            scale: imageScale,
+            rotateY: imageRotateY,
+            rotateX: imageRotateX,
+            rotateZ: imageRotateZ,
+            transformStyle: "preserve-3d",
+            boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0,0,0,0.1)"
+          }}
+        >
+          {DATA.map((item, i) => (
+            <ImageLayer 
+              key={i} 
+              src={item.img} 
+              index={i} 
+              progress={smoothProgress} 
+              stepSize={stepSize}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const TextBlock = ({ item, index, progress, stepSize }: any) => {
+  const center = index * stepSize;
+  const inRange = [
+    center - stepSize * 0.5,
+    center - stepSize * 0.2,
+    center + stepSize * 0.2,
+    center + stepSize * 0.5
+  ];
+  
+  const opacity = useTransform(progress, inRange, [0, 1, 1, 0]);
+  const pointerEvents = useTransform(opacity, (val) => val > 0.6 ? "auto" : "none");
+  
+  // Parallax offsets: enter from below (+y), exit upwards (-y) at staggered speeds
+  const ySubtitle = useTransform(progress, inRange, [100, 0, 0, -120]);
+  const yTitle = useTransform(progress, inRange, [150, 0, 0, -180]);
+  const yDesc = useTransform(progress, inRange, [200, 0, 0, -240]);
+
+  const isLeft = index % 2 === 0;
+
+  return (
+    <motion.div 
+      className="absolute top-1/2 -translate-y-1/2 flex flex-col justify-center px-8 lg:px-16 2xl:px-24"
+      style={{
+        left: isLeft ? '5%' : '55%',
+        width: '40%',
+        opacity,
+        zIndex: 20,
+        pointerEvents
+      }}
+    >
+      <motion.h2 
+        style={{ y: ySubtitle }}
+        className="text-sm font-bold text-[#f9c80e] uppercase tracking-[0.3em] mb-4 drop-shadow-sm"
+      >
+        {index === 0 ? "Swimming Pools" : `0${index} / 08`}
+      </motion.h2>
+      <motion.h3 
+        style={{ y: yTitle }}
+        className="text-4xl lg:text-5xl 2xl:text-6xl font-bold text-[#0a5c86] dark:text-white font-display leading-[1.1] mb-6 drop-shadow-sm"
+      >
+        {item.title}
+      </motion.h3>
+      <motion.p 
+        style={{ y: yDesc }}
+        className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-serif max-w-lg mb-6"
+      >
+        {item.desc}
+      </motion.p>
+      {item.id && (
+        <motion.div style={{ y: yDesc }}>
+          <Link 
+            to={item.id === 'private-swimming-pools' ? '/private-swimming-pools' : item.id === 'commercial-swimming-pools' ? '/commercial-swimming-pools' : item.id === 'recreation-swimming-pools' ? '/recreational-swimming-pools' : item.id === 'competition-swimming-pools' ? '/competition-swimming-pools' : item.id === 'vanishing-edge-swimming-pools' ? '/vanishing-edge-swimming-pools' : item.id === 'overflow-type-swimming-pools' ? '/overflow-type-swimming-pools' : item.id === 'skimmer-type-swimming-pools' ? '/skimmer-type-swimming-pools' : item.id === 'readymade-swimming-pool' ? '/readymade-swimming-pool' : '/swimming-pool-types'}
+            className="inline-flex items-center text-[#f9c80e] font-bold text-sm tracking-widest uppercase animate-pulse hover:text-[#e0b40b] transition-colors"
+          >
+            Learn More <ArrowRight size={16} className="ml-2" />
+          </Link>
+        </motion.div>
+      )}
+    </motion.div>
+  );
+};
+
+const ImageLayer = ({ src, index, progress, stepSize }: any) => {
+  const center = index * stepSize;
+  const inRange = [
+    center - stepSize * 0.6,
+    center - stepSize * 0.4,
+    center + stepSize * 0.4,
+    center + stepSize * 0.6
+  ];
+  
+  const opacity = useTransform(progress, inRange, [0, 1, 1, 0]);
+  const scale = useTransform(progress, inRange, [1.15, 1, 1, 1.15]); 
+
+  return (
+    <motion.div className="absolute inset-0 origin-center" style={{ opacity }}>
+      <motion.img 
+        src={src} 
+        alt="Pool type" 
+        className="w-full h-full object-cover" 
+        style={{ scale }}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-black/30" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[24px]" />
+    </motion.div>
+  );
+};
+
+const MobileView = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 400, damping: 40 });
+
+  return (
+    <div ref={containerRef} className="flex flex-col relative bg-[#f8fafc] dark:bg-[#060F1A] transition-colors duration-500 py-32 px-6 sm:px-8 space-y-32 overflow-hidden">
+      {/* Background Bubbles */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
+        <div className="sticky top-0 h-[100vh] w-full">
+          <BubbleBackground />
+        </div>
+      </div>
+
+      <div className="relative z-10 text-center max-w-xl mx-auto border-b border-gray-200 dark:border-slate-800 pb-16 w-full">
+        <h1 className="text-sm font-bold text-[#f9c80e] uppercase tracking-[0.3em] mb-4">Swimming Pools</h1>
+        <h2 className="text-4xl font-bold text-[#0a5c86] dark:text-white font-display leading-[1.1]">
+          Dive into Excellence
+        </h2>
+        <p className="mt-8 text-lg text-slate-600 dark:text-slate-400 font-serif leading-relaxed">
+          Discover our diverse range of luxury pools, engineered for beauty, durability, and a pristine swimming experience.
+        </p>
+      </div>
+
+      {DATA.slice(1).map((item, idx) => (
+        <motion.div 
+          key={idx}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col space-y-6 relative z-10"
+        >
+          <div className="text-sm font-bold text-[#f9c80e] uppercase tracking-[0.2em] flex items-center">
+            <span className="w-8 h-px bg-[#f9c80e] mr-3"></span>
+            0{idx + 1} / 08
+          </div>
+          <div className="h-[45vh] w-full rounded-[20px] overflow-hidden shadow-2xl relative">
+             <img src={item.img} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110" alt={item.title} />
+             <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-black/30" />
+          </div>
+          <h3 className="text-3xl font-bold text-[#0a5c86] dark:text-white font-display leading-[1.1] pt-4">
+            {item.title}
+          </h3>
+          <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-serif text-lg">
+            {item.desc}
+          </p>
+          {item.id && (
+            <Link 
+              to={item.id === 'private-swimming-pools' ? '/private-swimming-pools' : item.id === 'commercial-swimming-pools' ? '/commercial-swimming-pools' : item.id === 'recreation-swimming-pools' ? '/recreational-swimming-pools' : item.id === 'competition-swimming-pools' ? '/competition-swimming-pools' : item.id === 'vanishing-edge-swimming-pools' ? '/vanishing-edge-swimming-pools' : item.id === 'overflow-type-swimming-pools' ? '/overflow-type-swimming-pools' : item.id === 'skimmer-type-swimming-pools' ? '/skimmer-type-swimming-pools' : item.id === 'readymade-swimming-pool' ? '/readymade-swimming-pool' : '/swimming-pool-types'}
+              className="inline-flex items-center text-[#f9c80e] font-bold text-sm tracking-widest uppercase animate-pulse mt-2"
+            >
+              Learn More <ArrowRight size={16} className="ml-2" />
+            </Link>
+          )}
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export default function PoolAnimatedSection() {
+  return (
+    <section>
+      {prefersReducedMotion ? (
+        <MobileView />
+      ) : (
+        <>
+          <div className="hidden lg:block relative z-10">
+            <DesktopView />
+          </div>
+          <div className="block lg:hidden relative z-10">
+            <MobileView />
+          </div>
+        </>
+      )}
+    </section>
+  );
+}

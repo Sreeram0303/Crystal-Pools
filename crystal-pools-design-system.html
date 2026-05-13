@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystal Pools — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Anton&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand-blue:    #0a5c86;
+      --brand-cyan:    #06b6d4;
+      --brand-gold:    #f9c80e;
+      --dark-bg:       #060f1a;
+      --dark-surface:  #09090b;
+      --light-bg:      #fbfbfb;
+
+      --font-sans:     'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-display:  'Outfit', sans-serif;
+      --font-serif:    'Playfair Display', Georgia, serif;
+      --font-milker:   'Anton', sans-serif;
+      --font-creative: 'Pacifico', cursive;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #f0f2f5;
+      color: #1a202c;
+      line-height: 1.5;
+      padding: 0 0 80px;
+    }
+
+    /* ── Page header ────────────────────────────────────────────── */
+    .page-header {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 40px 48px 36px;
+    }
+    .page-header .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+    .page-header p {
+      font-size: 15px;
+      color: #64748b;
+      margin-top: 6px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      padding: 4px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 999px;
+      color: #64748b;
+      background: #f8fafc;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .page-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px 0;
+    }
+
+    /* ── Section header ─────────────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      padding-left: 2px;
+    }
+
+    /* ── Card base ──────────────────────────────────────────────── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .card-body { padding: 20px; }
+
+    /* ── Grid layouts ────────────────────────────────────────────── */
+    .grid-2col { display: grid; grid-template-columns: 280px 1fr; gap: 24px; margin-bottom: 24px; }
+    .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .grid-2col-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .stack { display: flex; flex-direction: column; gap: 16px; }
+
+    @media (max-width: 1024px) {
+      .grid-2col { grid-template-columns: 1fr; }
+      .grid-3col { grid-template-columns: repeat(2, 1fr); }
+      .grid-2col-equal { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid-3col { grid-template-columns: 1fr; }
+      .page-header { padding: 28px 20px; }
+      .page-body { padding: 24px 16px 0; }
+    }
+
+    /* ── Colour card ────────────────────────────────────────────── */
+    .color-header {
+      height: 56px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 16px 10px;
+    }
+    .color-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      letter-spacing: 0.03em;
+    }
+    .color-hex {
+      margin-left: auto;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+    }
+    .swatch-strip {
+      display: flex;
+      height: 24px;
+      margin: 12px 0 8px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .swatch-strip span { flex: 1; }
+    .color-meta { display: flex; flex-direction: column; gap: 3px; }
+    .color-token { font-family: var(--font-sans); font-size: 10px; color: #94a3b8; font-weight: 500; }
+    .color-rgb   { font-family: var(--font-sans); font-size: 10px; color: #94a3b8; }
+    .color-desc  { font-size: 11px; color: #64748b; margin-top: 4px; line-height: 1.5; }
+
+    /* ── Typography card ────────────────────────────────────────── */
+    .type-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; }
+    .type-specimen {
+      flex: 1;
+      min-width: 0;
+    }
+    .type-specimen .aa {
+      font-size: 64px;
+      line-height: 1;
+      color: #0f172a;
+    }
+    .type-sample {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .type-sample span { font-size: 12px; color: #475569; }
+    .type-meta { text-align: right; flex-shrink: 0; }
+    .type-role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .type-family { font-size: 14px; font-weight: 600; color: #0f172a; margin-top: 2px; }
+    .type-cls    { font-family: var(--font-sans); font-size: 10px; color: #94a3b8; margin-top: 3px; }
+    .type-sizes  { display: flex; gap: 4px; justify-content: flex-end; margin-top: 8px; }
+    .type-size-chip {
+      font-size: 9px;
+      background: #f1f5f9;
+      color: #64748b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+    }
+
+    /* ── Type scale ─────────────────────────────────────────────── */
+    .scale-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .scale-row:last-child { border-bottom: none; }
+    .scale-label { font-family: var(--font-sans); font-size: 9px; color: #94a3b8; width: 90px; flex-shrink: 0; }
+
+    /* ── Buttons ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 12px;
+      border: none;
+      cursor: default;
+      transition: none;
+      text-decoration: none;
+    }
+    .btn-sm  { padding: 8px 16px; font-size: 11px; }
+    .btn-md  { padding: 12px 24px; font-size: 12px; }
+    .btn-lg  { padding: 14px 28px; font-size: 13px; }
+    .btn-primary   { background: var(--brand-blue); color: white; }
+    .btn-secondary { background: transparent; border: 1px solid #cbd5e1; color: #475569; }
+    .btn-ghost     { background: transparent; color: var(--brand-blue); }
+    .btn-disabled  { background: var(--brand-blue); color: white; opacity: 0.5; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .btn-row:last-child { margin-bottom: 0; }
+
+    /* ── Form inputs ────────────────────────────────────────────── */
+    .input-wrap { position: relative; }
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    input[type=text] {
+      width: 100%;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      outline: none;
+    }
+    input.with-icon { padding-left: 34px; }
+    input.focused   { border: 2px solid var(--brand-blue); background: white; color: #1a202c; }
+    input.error     { border: 2px solid #f87171; background: white; color: #1a202c; }
+    .input-tag {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 9px;
+      font-weight: 700;
+      font-family: var(--font-sans);
+    }
+    .tag-focused { color: var(--brand-blue); }
+    .tag-error   { color: #ef4444; }
+    .input-stack { display: flex; flex-direction: column; gap: 10px; }
+
+    /* ── Badges ─────────────────────────────────────────────────── */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge-row:last-child { margin-bottom: 0; }
+    .badge {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .badge-blue    { background: var(--brand-blue); color: white; }
+    .badge-cyan    { background: var(--brand-cyan); color: white; }
+    .badge-gold    { background: var(--brand-gold); color: #1a202c; }
+    .badge-neutral { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+    .badge-green   { background: #dcfce7; color: #15803d; }
+    .badge-red     { background: #fee2e2; color: #dc2626; }
+    .badge-amber   { background: #fef3c7; color: #d97706; }
+    .badge-outline-blue  { border: 2px solid var(--brand-blue); color: var(--brand-blue); background: transparent; }
+    .badge-outline-cyan  { border: 2px solid var(--brand-cyan); color: var(--brand-cyan); background: transparent; }
+    .badge-outline-gold  { border: 2px solid var(--brand-gold); color: #b45309; background: transparent; }
+
+    /* ── Dividers ────────────────────────────────────────────────── */
+    .divider-stack { display: flex; flex-direction: column; gap: 14px; }
+    .divider { height: 1px; background: #e2e8f0; border-radius: 1px; }
+    .divider-blue  { height: 2px; background: var(--brand-blue); border-radius: 2px; }
+    .divider-cyan  { height: 2px; background: var(--brand-cyan); border-radius: 2px; }
+    .divider-gold  { height: 2px; background: var(--brand-gold); border-radius: 2px; }
+    .divider-with-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .divider-with-text .line { flex: 1; height: 1px; background: #e2e8f0; }
+    .divider-with-text span { font-size: 11px; color: #94a3b8; font-weight: 500; }
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .divider-ornament .short-line { width: 32px; height: 2px; background: var(--brand-gold); border-radius: 2px; }
+
+    /* ── Border radius ───────────────────────────────────────────── */
+    .radius-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; }
+    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .radius-box {
+      width: 40px;
+      height: 40px;
+      background: rgba(10,92,134,0.12);
+      border: 2px solid rgba(10,92,134,0.35);
+    }
+    .radius-token { font-size: 9px; color: #94a3b8; font-family: var(--font-sans); }
+
+    /* ── Shadows ─────────────────────────────────────────────────── */
+    .shadow-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+    .shadow-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .shadow-box  { width: 56px; height: 56px; background: white; border-radius: 12px; }
+    .shadow-sm   { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .shadow-md   { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .shadow-lg   { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .shadow-xl   { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+    .shadow-2xl  { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+    .shadow-label { font-size: 9px; color: #94a3b8; font-family: var(--font-sans); }
+
+    /* ── Icons ───────────────────────────────────────────────────── */
+    .icon-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      cursor: default;
+    }
+    .icon-btn svg { width: 16px; height: 16px; }
+    .icon-btn.blue   { background: var(--brand-blue);  color: white; }
+    .icon-btn.cyan   { background: var(--brand-cyan);  color: white; }
+    .icon-btn.gold   { background: var(--brand-gold);  color: #1a202c; }
+
+    /* ── Dark mode preview ───────────────────────────────────────── */
+    .dark-card {
+      background: var(--dark-bg);
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+      padding: 20px;
+    }
+    .dark-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #334155; margin-bottom: 16px; }
+    .dark-h-white { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: #ffffff; }
+    .dark-h-gold  { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--brand-gold); }
+    .dark-body    { font-size: 13px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+    .dark-badge-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .dark-badge-gold    { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 999px; background: var(--brand-gold); color: #1a202c; }
+    .dark-badge-outline { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); color: white; }
+    .dark-btn-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .dark-btn-primary   { background: var(--brand-blue); color: white; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: 10px; border: none; cursor: default; }
+    .dark-btn-secondary { background: transparent; color: #94a3b8; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: 10px; border: 1px solid #1e293b; cursor: default; }
+
+    /* ── CSS tokens code block ───────────────────────────────────── */
+    .code-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px; }
+    .code-block {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+      overflow: auto;
+    }
+    pre {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      line-height: 1.8;
+      color: #475569;
+      white-space: pre;
+    }
+    .tok-var   { color: var(--brand-blue); font-weight: 600; }
+    .tok-val   { color: #0891b2; }
+    .tok-str   { color: #059669; }
+    .tok-punct { color: #94a3b8; }
+
+    /* ── Spacing section ─────────────────────────────────────────── */
+    .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+    .spacing-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .spacing-bar  { background: rgba(6,182,212,0.25); border-radius: 4px; width: 20px; }
+    .spacing-val  { font-size: 9px; color: #94a3b8; font-family: var(--font-sans); }
+
+    /* ── SVG icons helper ────────────────────────────────────────── */
+    svg { vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    .ds-footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ PAGE HEADER ══════════════════════════════════════════════════════ -->
+<header class="page-header">
+  <p class="eyebrow">Crystal Pools</p>
+  <h1>Design System</h1>
+  <p>Tokens, typography, and components — single source of truth for the brand.</p>
+  <div class="chips">
+    <span class="chip">Tailwind CSS v4</span>
+    <span class="chip">Motion (Framer)</span>
+    <span class="chip">Lucide Icons</span>
+    <span class="chip">React 19</span>
+    <span class="chip">TypeScript 5.8</span>
+  </div>
+</header>
+
+<main class="page-body">
+
+  <!-- ══ SECTION 1: COLOURS ══════════════════════════════════════════════ -->
+  <p class="section-label">Colour Tokens</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-bottom:32px;">
+
+    <!-- Primary -->
+    <div class="card">
+      <div class="color-header" style="background:#0a5c86;">
+        <span class="color-name">Primary</span>
+        <span class="color-hex">#0a5c86</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#e0f0f8;"></span><span style="background:#b3d5e9;"></span>
+          <span style="background:#80b9d8;"></span><span style="background:#4d9dc6;"></span>
+          <span style="background:#1a82b5;"></span><span style="background:#0a5c86;"></span>
+          <span style="background:#084d71;"></span><span style="background:#05374f;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">--color-brand-blue</span>
+          <span class="color-rgb">rgb(10 92 134)</span>
+          <span class="color-desc">Main brand colour — navbars, CTAs, light-mode headings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cyan -->
+    <div class="card">
+      <div class="color-header" style="background:#06b6d4;">
+        <span class="color-name">Cyan</span>
+        <span class="color-hex">#06b6d4</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#e0f9fd;"></span><span style="background:#b3eef7;"></span>
+          <span style="background:#7fe2f1;"></span><span style="background:#4cd6eb;"></span>
+          <span style="background:#1acae5;"></span><span style="background:#06b6d4;"></span>
+          <span style="background:#059ab5;"></span><span style="background:#047e94;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">--color-brand-cyan</span>
+          <span class="color-rgb">rgb(6 182 212)</span>
+          <span class="color-desc">Water / pool accent — highlights, icons, links</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="card">
+      <div class="color-header" style="background:#f9c80e;">
+        <span class="color-name" style="color:#1a202c; text-shadow:none;">Gold</span>
+        <span class="color-hex" style="color:rgba(0,0,0,0.5);">#f9c80e</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#fef9e2;"></span><span style="background:#fdedb6;"></span>
+          <span style="background:#fce082;"></span><span style="background:#fbd34e;"></span>
+          <span style="background:#fac61a;"></span><span style="background:#f9c80e;"></span>
+          <span style="background:#d4aa0b;"></span><span style="background:#af8c09;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">--color-brand-gold</span>
+          <span class="color-rgb">rgb(249 200 14)</span>
+          <span class="color-desc">Premium accent — dark-mode headings, badges, ornaments</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div class="card">
+      <div class="color-header" style="background:#060f1a;">
+        <span class="color-name">Dark</span>
+        <span class="color-hex">#060f1a</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#e8eaed;"></span><span style="background:#c5c9d1;"></span>
+          <span style="background:#929baa;"></span><span style="background:#5f6d84;"></span>
+          <span style="background:#2c3f5e;"></span><span style="background:#152a47;"></span>
+          <span style="background:#0d1c30;"></span><span style="background:#060f1a;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">--color-dark-bg</span>
+          <span class="color-rgb">rgb(6 15 26)</span>
+          <span class="color-desc">Dark mode page canvas — deepest background</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Surface -->
+    <div class="card">
+      <div class="color-header" style="background:#09090b;">
+        <span class="color-name">Surface</span>
+        <span class="color-hex">#09090b</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#f4f4f5;"></span><span style="background:#d4d4d8;"></span>
+          <span style="background:#a1a1aa;"></span><span style="background:#71717a;"></span>
+          <span style="background:#3f3f46;"></span><span style="background:#27272a;"></span>
+          <span style="background:#18181b;"></span><span style="background:#09090b;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">--color-dark-surface</span>
+          <span class="color-rgb">rgb(9 9 11)</span>
+          <span class="color-desc">Dark mode card / panel surface</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neutral -->
+    <div class="card">
+      <div class="color-header" style="background:#64748b;">
+        <span class="color-name">Neutral</span>
+        <span class="color-hex">#64748b</span>
+      </div>
+      <div class="card-body">
+        <div class="swatch-strip">
+          <span style="background:#f8fafc;"></span><span style="background:#e2e8f0;"></span>
+          <span style="background:#cbd5e1;"></span><span style="background:#94a3b8;"></span>
+          <span style="background:#64748b;"></span><span style="background:#475569;"></span>
+          <span style="background:#334155;"></span><span style="background:#1e293b;"></span>
+        </div>
+        <div class="color-meta">
+          <span class="color-token">slate (Tailwind)</span>
+          <span class="color-rgb">rgb(100 116 139)</span>
+          <span class="color-desc">Body text, borders, muted UI surfaces</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ SECTION 2: TYPOGRAPHY ═══════════════════════════════════════════ -->
+  <p class="section-label">Typography</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; margin-bottom:16px;">
+
+    <div class="card">
+      <div class="type-card">
+        <div class="type-specimen">
+          <div class="aa" style="font-family:'Outfit',sans-serif;">Aa</div>
+          <div class="type-sample">
+            <span style="font-family:'Outfit',sans-serif;">AaBbCcDd</span>
+            <span style="font-family:'Outfit',sans-serif;">0123456789</span>
+            <span style="font-family:'Outfit',sans-serif;">!@#$%</span>
+          </div>
+        </div>
+        <div class="type-meta">
+          <div class="type-role">Display</div>
+          <div class="type-family">Outfit</div>
+          <div class="type-cls">font-display</div>
+          <div class="type-sizes">
+            <span class="type-size-chip">5xl</span>
+            <span class="type-size-chip">3xl</span>
+            <span class="type-size-chip">xl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="type-card">
+        <div class="type-specimen">
+          <div class="aa" style="font-family:'Inter',sans-serif; font-weight:400;">Aa</div>
+          <div class="type-sample">
+            <span style="font-family:'Inter',sans-serif;">AaBbCcDd</span>
+            <span style="font-family:'Inter',sans-serif;">0123456789</span>
+            <span style="font-family:'Inter',sans-serif;">!@#$%</span>
+          </div>
+        </div>
+        <div class="type-meta">
+          <div class="type-role">Body</div>
+          <div class="type-family">Inter</div>
+          <div class="type-cls">font-sans</div>
+          <div class="type-sizes">
+            <span class="type-size-chip">lg</span>
+            <span class="type-size-chip">base</span>
+            <span class="type-size-chip">sm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="type-card">
+        <div class="type-specimen">
+          <div class="aa" style="font-family:'Playfair Display',serif; font-weight:400;">Aa</div>
+          <div class="type-sample">
+            <span style="font-family:'Playfair Display',serif;">AaBbCcDd</span>
+            <span style="font-family:'Playfair Display',serif; font-style:italic;">Italic</span>
+          </div>
+        </div>
+        <div class="type-meta">
+          <div class="type-role">Serif</div>
+          <div class="type-family">Playfair</div>
+          <div class="type-cls">font-serif</div>
+          <div class="type-sizes">
+            <span class="type-size-chip">5xl</span>
+            <span class="type-size-chip">3xl</span>
+            <span class="type-size-chip">xl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="type-card">
+        <div class="type-specimen">
+          <div class="aa" style="font-family:'Anton',sans-serif; font-weight:400; font-size:56px; line-height:1;">Aa</div>
+          <div class="type-sample">
+            <span style="font-family:'Anton',sans-serif;">IMPACT TEXT</span>
+          </div>
+        </div>
+        <div class="type-meta">
+          <div class="type-role">Milker</div>
+          <div class="type-family">Anton</div>
+          <div class="type-cls">font-milker</div>
+          <div class="type-sizes">
+            <span class="type-size-chip">6xl</span>
+            <span class="type-size-chip">4xl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="type-card">
+        <div class="type-specimen">
+          <div class="aa" style="font-family:'Pacifico',cursive; font-size:52px; line-height:1.1; font-weight:400;">Aa</div>
+          <div class="type-sample">
+            <span style="font-family:'Pacifico',cursive; font-size:13px;">Decorative</span>
+          </div>
+        </div>
+        <div class="type-meta">
+          <div class="type-role">Creative</div>
+          <div class="type-family">Pacifico</div>
+          <div class="type-cls">font-creative</div>
+          <div class="type-sizes">
+            <span class="type-size-chip">4xl</span>
+            <span class="type-size-chip">2xl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Type scale -->
+  <div class="card" style="margin-bottom:32px;">
+    <div class="card-body">
+      <p class="section-label" style="margin-bottom:12px;">Type Scale</p>
+      <div class="scale-row"><span class="scale-label">7xl / 72px</span><span style="font-family:'Outfit',sans-serif; font-size:clamp(36px,5vw,72px); font-weight:700; color:#0f172a; line-height:1;">Hero</span></div>
+      <div class="scale-row"><span class="scale-label">5xl / 48px</span><span style="font-family:'Outfit',sans-serif; font-size:clamp(28px,4vw,48px); font-weight:700; color:#0f172a; line-height:1;">Headline</span></div>
+      <div class="scale-row"><span class="scale-label">3xl / 30px</span><span style="font-family:'Outfit',sans-serif; font-size:30px; font-weight:700; color:#0f172a; line-height:1;">Section Title</span></div>
+      <div class="scale-row"><span class="scale-label">xl / 20px</span>  <span style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:600; color:#0f172a;">Subheading</span></div>
+      <div class="scale-row"><span class="scale-label">base / 16px</span><span style="font-family:'Inter',sans-serif; font-size:16px; font-weight:400; color:#475569;">Body paragraph text — comfortable reading length for all screens.</span></div>
+      <div class="scale-row"><span class="scale-label">sm / 14px</span>  <span style="font-family:'Inter',sans-serif; font-size:14px; font-weight:400; color:#475569;">Caption or label text</span></div>
+      <div class="scale-row"><span class="scale-label">xs / 12px</span>  <span style="font-family:'Inter',sans-serif; font-size:12px; font-weight:500; color:#94a3b8; text-transform:uppercase; letter-spacing:0.1em;">MONO / TOKEN / CODE</span></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: COMPONENTS ═══════════════════════════════════════════ -->
+  <p class="section-label">Components</p>
+
+  <div class="grid-3col">
+
+    <!-- Buttons -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Buttons</p>
+        <div class="btn-row">
+          <span class="btn btn-primary btn-sm">Primary</span>
+          <span class="btn btn-secondary btn-sm">Secondary</span>
+          <span class="btn btn-ghost btn-sm">Ghost</span>
+          <span class="btn btn-disabled btn-sm">Disabled</span>
+        </div>
+        <div class="btn-row">
+          <span class="btn btn-primary btn-md">
+            <svg viewBox="0 0 24 24" width="13" height="13"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Get Quote
+          </span>
+          <span class="btn btn-secondary btn-md">
+            <svg viewBox="0 0 24 24" width="13" height="13"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.61 5.61l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Us
+          </span>
+        </div>
+        <div class="btn-row">
+          <span class="btn btn-primary btn-lg">Large CTA Button</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Inputs -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Form Inputs</p>
+        <div class="input-stack">
+          <div class="input-wrap">
+            <svg class="input-icon" viewBox="0 0 24 24" width="14" height="14"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="with-icon" value="Search pools..." readonly />
+          </div>
+          <div class="input-wrap">
+            <input type="text" class="focused" value="Contact number" readonly />
+            <span class="input-tag tag-focused">focused</span>
+          </div>
+          <div class="input-wrap">
+            <input type="text" class="error" value="Invalid email address" readonly />
+            <span class="input-tag tag-error">error</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Badges & Chips</p>
+        <div class="badge-row">
+          <span class="badge badge-blue">Primary</span>
+          <span class="badge badge-cyan">Cyan</span>
+          <span class="badge badge-gold">Gold</span>
+          <span class="badge badge-neutral">Neutral</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge-green">Success</span>
+          <span class="badge badge-red">Error</span>
+          <span class="badge badge-amber">Warning</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge-outline-blue">Outlined</span>
+          <span class="badge badge-outline-cyan">Outlined</span>
+          <span class="badge badge-outline-gold">Outlined</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dividers -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Dividers</p>
+        <div class="divider-stack">
+          <div class="divider"></div>
+          <div class="divider-blue"></div>
+          <div class="divider-cyan"></div>
+          <div class="divider-gold"></div>
+          <div class="divider-with-text">
+            <div class="line"></div>
+            <span>OR</span>
+            <div class="line"></div>
+          </div>
+          <div class="divider-ornament">
+            <div class="short-line"></div>
+            <svg viewBox="0 0 24 24" width="14" height="14" style="color:#f9c80e;">
+              <path d="M12 2L8 8H2l5 4-2 7 7-5 7 5-2-7 5-4h-6z" fill="#f9c80e" stroke="none"/>
+            </svg>
+            <div class="short-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing / Radius -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Border Radius</p>
+        <div class="radius-row" style="margin-bottom:20px;">
+          <div class="radius-item"><div class="radius-box" style="border-radius:4px;"></div><span class="radius-token">sm / 4px</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius:8px;"></div><span class="radius-token">lg / 8px</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius:12px;"></div><span class="radius-token">xl / 12px</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius:16px;"></div><span class="radius-token">2xl / 16px</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius:24px;"></div><span class="radius-token">3xl / 24px</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius:999px;"></div><span class="radius-token">full / ∞</span></div>
+        </div>
+        <p class="section-label" style="margin-top:4px;">Spacing Scale</p>
+        <div class="spacing-row">
+          <div class="spacing-item"><div class="spacing-bar" style="height:4px;"></div><span class="spacing-val">1 / 4px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:8px;"></div><span class="spacing-val">2 / 8px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:12px;"></div><span class="spacing-val">3 / 12px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:16px;"></div><span class="spacing-val">4 / 16px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:20px;"></div><span class="spacing-val">5 / 20px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:24px;"></div><span class="spacing-val">6 / 24px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:32px;"></div><span class="spacing-val">8 / 32px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:40px;"></div><span class="spacing-val">10 / 40px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:48px;"></div><span class="spacing-val">12 / 48px</span></div>
+          <div class="spacing-item"><div class="spacing-bar" style="height:64px;"></div><span class="spacing-val">16 / 64px</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shadows & Icons -->
+    <div class="card">
+      <div class="card-body">
+        <p class="section-label">Shadows</p>
+        <div class="shadow-row" style="margin-bottom:20px;">
+          <div class="shadow-item"><div class="shadow-box shadow-sm"></div><span class="shadow-label">sm</span></div>
+          <div class="shadow-item"><div class="shadow-box shadow-md"></div><span class="shadow-label">md</span></div>
+          <div class="shadow-item"><div class="shadow-box shadow-lg"></div><span class="shadow-label">lg</span></div>
+          <div class="shadow-item"><div class="shadow-box shadow-xl"></div><span class="shadow-label">xl</span></div>
+          <div class="shadow-item"><div class="shadow-box shadow-2xl"></div><span class="shadow-label">2xl</span></div>
+        </div>
+        <p class="section-label" style="margin-top:4px;">Icons — Lucide</p>
+        <div class="icon-grid">
+          <!-- home -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button>
+          <!-- search -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+          <!-- phone -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.61 5.61l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button>
+          <!-- map-pin -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></button>
+          <!-- waves -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></button>
+          <!-- star -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <!-- shield -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
+          <!-- zap -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></button>
+          <!-- chevron-right -->
+          <button class="icon-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <!-- Brand coloured icons -->
+          <button class="icon-btn blue"><svg viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></button>
+          <button class="icon-btn cyan"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+          <button class="icon-btn gold"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#1a202c" stroke="none"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ SECTION 4: DARK MODE ════════════════════════════════════════════ -->
+  <p class="section-label">Dark Mode</p>
+
+  <div class="grid-2col-equal">
+
+    <!-- Dark preview -->
+    <div class="dark-card">
+      <p class="dark-label">Dark Mode Preview</p>
+      <div class="dark-h-white">Heading — White</div>
+      <div class="dark-h-gold" style="margin-top:4px;">Heading — Gold</div>
+      <p class="dark-body">Body text at slate-400 — comfortable reading contrast against the midnight navy background (#060f1a).</p>
+      <div class="dark-badge-row">
+        <span class="dark-badge-gold">Gold badge</span>
+        <span class="dark-badge-outline">Outlined</span>
+        <span class="dark-badge-outline" style="border-color:rgba(249,200,14,0.4); color:#f9c80e;">Gold outline</span>
+      </div>
+      <div class="dark-btn-row">
+        <button class="dark-btn-primary">Primary</button>
+        <button class="dark-btn-secondary">Secondary</button>
+      </div>
+    </div>
+
+    <!-- CSS tokens reference -->
+    <div class="code-card">
+      <p class="section-label" style="margin-bottom:12px;">CSS Custom Properties</p>
+      <div class="code-block">
+        <pre>
+<span class="tok-punct">@theme</span> <span class="tok-punct">{</span>
+  <span class="tok-var">--color-brand-blue</span><span class="tok-punct">:</span>   <span class="tok-str">#0a5c86</span><span class="tok-punct">;</span>
+  <span class="tok-var">--color-brand-cyan</span><span class="tok-punct">:</span>   <span class="tok-str">#06b6d4</span><span class="tok-punct">;</span>
+  <span class="tok-var">--color-brand-gold</span><span class="tok-punct">:</span>   <span class="tok-str">#f9c80e</span><span class="tok-punct">;</span>
+  <span class="tok-var">--color-dark-bg</span><span class="tok-punct">:</span>      <span class="tok-str">#060f1a</span><span class="tok-punct">;</span>
+  <span class="tok-var">--color-dark-surface</span><span class="tok-punct">:</span> <span class="tok-str">#09090b</span><span class="tok-punct">;</span>
+  <span class="tok-var">--color-light-bg</span><span class="tok-punct">:</span>     <span class="tok-str">#fbfbfb</span><span class="tok-punct">;</span>
+
+  <span class="tok-var">--font-sans</span><span class="tok-punct">:</span>     <span class="tok-val">"Inter"</span><span class="tok-punct">;</span>
+  <span class="tok-var">--font-display</span><span class="tok-punct">:</span>  <span class="tok-val">"Outfit"</span><span class="tok-punct">;</span>
+  <span class="tok-var">--font-serif</span><span class="tok-punct">:</span>    <span class="tok-val">"Playfair Display"</span><span class="tok-punct">;</span>
+  <span class="tok-var">--font-milker</span><span class="tok-punct">:</span>   <span class="tok-val">"Anton"</span><span class="tok-punct">;</span>
+  <span class="tok-var">--font-creative</span><span class="tok-punct">:</span> <span class="tok-val">"Pacifico"</span><span class="tok-punct">;</span>
+<span class="tok-punct">}</span>
+
+<span class="tok-punct">/* Usage examples */</span>
+<span class="tok-var">bg-brand-blue</span>          <span class="tok-punct">→</span> <span class="tok-str">background: #0a5c86</span>
+<span class="tok-var">text-brand-gold</span>        <span class="tok-punct">→</span> <span class="tok-str">color: #f9c80e</span>
+<span class="tok-var">border-brand-cyan</span>      <span class="tok-punct">→</span> <span class="tok-str">border-color: #06b6d4</span>
+<span class="tok-var">dark:text-brand-gold</span>   <span class="tok-punct">→</span> <span class="tok-str">gold in dark mode</span>
+<span class="tok-var">dark:text-white</span>        <span class="tok-punct">→</span> <span class="tok-str">white headings in dark</span>
+        </pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ds-footer">
+    Crystal Pools Design System &nbsp;·&nbsp; Generated 2026 &nbsp;·&nbsp; Tailwind CSS v4 + React 19
+  </div>
+
+</main>
+</body>
+</html>

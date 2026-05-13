@@ -1,0 +1,72 @@
+﻿import { useRef, useEffect } from 'react';
+import { motion, useInView, useMotionValue, animate, useTransform } from 'motion/react';
+import LiquidBackground from './LiquidBackground';
+
+const ANIMATION_DURATION = 2.5;
+
+const RisingStat = ({ target, label, suffix = '', isInView }: { target: number, label: string, suffix?: string, isInView: boolean }) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const formattedCount = useTransform(rounded, (latest) => `${latest}${suffix}`);
+
+  useEffect(() => {
+    if (isInView) {
+      animate(count, target, {
+        duration: ANIMATION_DURATION,
+        ease: "linear",
+      });
+    }
+  }, [isInView, count, target]);
+
+  return (
+    <div className="flex flex-col items-center justify-center p-4 md:p-6 text-center group z-10 relative">
+      <div className="relative font-display font-bold text-5xl md:text-6xl lg:text-7xl tracking-tighter select-none flex justify-center w-full min-w-[150px]">
+        <motion.div 
+          className="text-white drop-shadow-md dark:drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]"
+        >
+          {formattedCount}
+        </motion.div>
+      </div>
+      <motion.p 
+        initial={{ opacity: 0, y: 10 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="text-[#0a5c86] dark:text-white uppercase tracking-[0.2em] mt-6 font-semibold text-sm md:text-base relative z-10 drop-shadow-sm"
+      >
+        {label}
+      </motion.p>
+    </div>
+  );
+};
+
+export default function CompanyStatsSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const bgProgressMotion = useMotionValue(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(bgProgressMotion, 100, {
+        duration: ANIMATION_DURATION,
+        ease: "linear"
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, bgProgressMotion]);
+
+  return (
+    <section ref={ref} className="py-24 md:py-32 transition-colors duration-500 relative overflow-hidden min-h-[500px]">
+      <LiquidBackground fillProgress={bgProgressMotion} />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 w-full">
+          <RisingStat target={2000} label="Pools" suffix="+" isInView={isInView} />
+          <RisingStat target={8} label="Categories" isInView={isInView} />
+          <RisingStat target={2000} label="Happy Clients" suffix="+" isInView={isInView} />
+          <RisingStat target={25} label="Years Of Experience" suffix="+" isInView={isInView} />
+        </div>
+      </div>
+    </section>
+  );
+}

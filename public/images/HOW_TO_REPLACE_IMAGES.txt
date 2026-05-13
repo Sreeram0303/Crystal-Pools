@@ -1,0 +1,100 @@
+CRYSTAL POOLS — HOW TO REPLACE WEBSITE IMAGES
+===============================================
+
+Drop your photos into the folders below. Keep the EXACT filenames.
+The website will update automatically — no developer needed.
+
+IMPORTANT: Use .jpg for photos, .png only if you need transparency.
+           You can drop any common format (.jpg, .png, .webp) — the
+           website will find it automatically by filename.
+
+─────────────────────────────────────────────────────────────────────────────
+hero/
+  light-mode.png      ← Home page background (light theme). 1920×1080.
+  dark-mode.png       ← Home page background (dark theme).  1920×1080.
+  hero-video.mp4      ← Home page looping video (light theme). H.264 MP4.
+
+─────────────────────────────────────────────────────────────────────────────
+about/
+  hero.jpg            ← About page full-screen hero (aerial / infinity pool).
+  pool-construction.jpg ← Detail shot of pool being built.
+
+─────────────────────────────────────────────────────────────────────────────
+services/
+  swimming-pool.jpg       ← Main flagship pool photo (home bento + services page).
+  waterfall-fountain.jpg  ← Waterfall & fountain card.
+  pool-tiles.jpg          ← Pool tiles / glass mosaic card.
+  products.jpg            ← Pool equipment card.
+  renovations.jpg         ← Renovations card.
+  turnkey-hero.jpg        ← Banner on the Turnkey Projects detail page.
+  tiles-detail-1.jpg      ← Pool Tiles page — photo 1.
+  tiles-detail-2.jpg      ← Pool Tiles page — photo 2.
+  tiles-detail-3.jpg      ← Pool Tiles page — photo 3.
+  tiles-detail-4.jpg      ← Pool Tiles page — photo 4.
+  water-features-1.jpg    ← Water Features page — photo 1.
+  water-features-2.jpg    ← Water Features page — photo 2.
+  water-features-3.jpg    ← Water Features page — photo 3.
+  renovation-hero.jpg     ← Renovation detail page — main photo.
+
+─────────────────────────────────────────────────────────────────────────────
+pool-types/
+  private.jpg        ← Private Swimming Pools page hero.
+  commercial.jpg     ← Commercial Swimming Pools page hero.
+  recreational.jpg   ← Recreational Swimming Pools page hero.
+  competition.jpg    ← Competition Swimming Pools page hero.
+  vanishing-edge.jpg ← Vanishing Edge Swimming Pools page hero.
+  overflow.jpg       ← Overflow Type Swimming Pools page hero.
+  skimmer.jpg        ← Skimmer Type Swimming Pools page hero.
+  readymade.jpg      ← Readymade Swimming Pool page hero.
+
+─────────────────────────────────────────────────────────────────────────────
+products/
+  heating.jpg   ← Heating System card.
+  sauna.jpg     ← Sauna & Steam card.
+  jacuzzi.jpg   ← Jacuzzi & Bath Tubs card.
+  planters.jpg  ← Planters & Sculptures card.
+
+─────────────────────────────────────────────────────────────────────────────
+gallery/
+  TWO sub-folders — one for each theme. Drop the same numbered filenames
+  into BOTH folders.
+
+  light/              ← Photos shown in LIGHT mode
+    gallery-01.jpg  ← Gallery photo 1  (large feature tile)
+    gallery-02.jpg  ← Gallery photo 2
+    gallery-03.jpg  ← Gallery photo 3
+    gallery-04.jpg  ← Gallery photo 4  (wide tile)
+    gallery-05.jpg  ← Gallery photo 5  (full-width banner)
+    gallery-06.jpg  ← Gallery photo 6
+    gallery-07.jpg  ← Gallery photo 7  (tall tile)
+    gallery-08.jpg  ← Gallery photo 8  (large square feature)
+    gallery-09.jpg  ← Gallery photo 9  (tall tile)
+    gallery-10.jpg  ← Gallery photo 10
+
+  dark/               ← Same filenames — photos shown in DARK mode
+    gallery-01.jpg … gallery-10.jpg
+
+  Recommended size: 800×600 minimum. gallery-01 and gallery-08 benefit from
+  1200×900 or higher as they occupy larger grid cells.
+  If you only have one set of photos, put the same images in both folders.
+
+─────────────────────────────────────────────────────────────────────────────
+locations/
+  pune.jpg      ← Pune office thumbnail shown on contact map.
+  mumbai.jpg    ← Mumbai office thumbnail.
+  nashik.jpg    ← Nashik office thumbnail.
+  kolhapur.jpg  ← Kolhapur office thumbnail.
+  alibag.jpg    ← Alibag office thumbnail.
+  goa.jpg       ← Goa office thumbnail.
+  udaipur.jpg   ← Udaipur / Rajasthan office thumbnail.
+
+  Recommended: 800×500 landscape photos of the city or office exterior.
+
+─────────────────────────────────────────────────────────────────────────────
+sections/
+  testimonials-bg.jpg ← Full-screen pool photo behind the testimonials section.
+                         1600×1200 recommended.
+  footer.jpg          ← Photo shown at the very top of the site footer.
+                         1920×600 wide panoramic recommended.
+  liquid-effect.jpg   ← Subtle pool texture overlaid on the water animation.
+                         1600×1200 recommended.

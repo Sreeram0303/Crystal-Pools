@@ -1,0 +1,106 @@
+.bb-root {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── shared bubble appearance ────────────────────────────────────────────── */
+.bb-bubble {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+
+  /*
+    Real soap-bubble optics:
+    1. Crescent highlight  — upper-left, white (direct specular)
+    2. Iridescent body     — blue dominant, hints of cyan + violet (thin-film colour)
+    3. Rim                 — faint blue border
+    4. ::after             — small bottom-right reflection (light through the sphere)
+  */
+  background:
+    /* 1. Primary crescent highlight */
+    radial-gradient(
+      ellipse 44% 36% at 28% 24%,
+      rgba(255, 255, 255, 0.95)  0%,
+      rgba(255, 255, 255, 0.40) 36%,
+      transparent               62%
+    ),
+    /* 2a. Deep blue wash — lower half */
+    radial-gradient(
+      ellipse 80% 60% at 40% 75%,
+      rgba( 0, 180, 255, 0.35)  0%,
+      rgba( 0, 120, 240, 0.15) 55%,
+      transparent               80%
+    ),
+    /* 2b. Vivid Cyan tint — right edge */
+    radial-gradient(
+      ellipse 50% 70% at 80% 45%,
+      rgba( 0, 240, 255, 0.35)  0%,
+      transparent               65%
+    ),
+    /* 2c. Deep ocean blue — left edge */
+    radial-gradient(
+      ellipse 40% 60% at 15% 55%,
+      rgba( 0, 80, 255, 0.25)  0%,
+      transparent               60%
+    ),
+    /* 2d. Overall darker blue body */
+    radial-gradient(
+      circle at 50% 58%,
+      rgba( 0, 150, 255, 0.15)  0%,
+      rgba( 0, 100, 255, 0.25) 65%,
+      rgba( 0, 60, 220, 0.40) 100%
+    );
+
+  border: 1px solid rgba(100, 200, 255, 0.5);
+
+  box-shadow:
+    inset 0  2px  8px rgba(255, 255, 255, 0.60),   /* top sheen    */
+    inset 0 -4px  8px rgba( 0, 180, 255, 0.30),   /* bottom depth */
+            0  0  12px rgba( 0, 150, 255, 0.25);   /* outer glow   */
+}
+
+/* secondary highlight — light bent through the back of the sphere */
+.bb-bubble::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width:  26%;
+  height: 20%;
+  bottom: 14%;
+  right:  16%;
+  background: radial-gradient(
+    ellipse,
+    rgba(150, 220, 255, 0.8)  0%,
+    transparent                70%
+  );
+}
+
+/* ── background bubbles: rise from bottom ────────────────────────────────── */
+.bb-bg {
+  bottom: -80px;
+  animation: bb-float linear infinite;
+}
+
+@keyframes bb-float {
+  0%   { transform: translateY(0);       opacity: 0;   }
+  8%   { opacity: 0.75; }
+  88%  { opacity: 0.70; }
+  100% { transform: translateY(-108vh);  opacity: 0;   }
+}
+
+/* ── mouse-spawned bubbles: pop into existence and float up ──────────────── */
+.bb-mouse {
+  bottom: auto;    /* position via top/left instead */
+  animation: bb-mouse-rise 2.0s ease-out forwards;
+}
+
+@keyframes bb-mouse-rise {
+  0%   { transform: scale(0.15) translateY(0);    opacity: 0;    }
+  14%  { transform: scale(1.05) translateY(-6px); opacity: 0.88; }
+  50%  { opacity: 0.75; }
+  100% { transform: scale(0.75) translateY(-95px); opacity: 0;   }
+}

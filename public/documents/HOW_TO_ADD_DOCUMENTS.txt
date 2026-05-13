@@ -1,0 +1,13 @@
+CRYSTAL POOLS — DOWNLOADABLE DOCUMENTS
+========================================
+
+Drop the client's PDF files into this folder using the EXACT filenames below.
+The download links in the website footer will work automatically.
+
+  company-brochure.pdf       ← "Company Brochure" link in footer
+  company-profile.pdf        ← "Company Profile" link in footer
+  glass-mosaic-catalogue.pdf ← "Glass Mosaic Catalogue" link in footer
+  frp-pool-brochure.pdf      ← "FRP Pool Brochure" link in footer
+
+NOTE: Links in the footer currently show "#" — a developer needs to update
+them to "/documents/<filename>.pdf" once the PDFs are provided.
