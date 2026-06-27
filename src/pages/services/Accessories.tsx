@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, ChevronRight, CheckCircle2 } from 'lucide-react';
@@ -13,16 +13,12 @@ const categories = [
 ];
 
 const marathonSpecs = [
-  { code: '04010D01', desc: 'Marathon Pump 1/2 HP', model: 'Single Phase', hp: '1/2', flow: '10.4' },
-  { code: '04010D02', desc: 'Marathon Pump 3/4 HP', model: 'Single Phase', hp: '3/4', flow: '12.7' },
-  { code: '04010D03', desc: 'Marathon Pump 1 HP', model: 'Single Phase', hp: '1', flow: '16.4' },
-  { code: '04010D04', desc: 'Marathon Pump 1 1/2 HP', model: 'Single Phase', hp: '1 1/2', flow: '21.3' },
-  { code: '04010D05', desc: 'Marathon Pump 2 HP', model: 'Single Phase', hp: '2', flow: '23.0' },
-  { code: '04010D06', desc: 'Marathon Pump 3 HP', model: 'Single Phase', hp: '3', flow: '27.0' },
-  { code: '04010D09', desc: 'Marathon Pump 1 HP', model: 'Three Phase', hp: '1', flow: '16.4' },
-  { code: '04010D10', desc: 'Marathon Pump 1 1/2 HP', model: 'Three Phase', hp: '1 1/2', flow: '21.3' },
-  { code: '04010D11', desc: 'Marathon Pump 2 HP', model: 'Three Phase', hp: '2', flow: '23.0' },
-  { code: '04010D12', desc: 'Marathon Pump 3 HP', model: 'Three Phase', hp: '3', flow: '27.0' },
+  { code: '04010D01', desc: 'Pump 1/2 HP', model: 'Single Phase', hp: '1/2', flow: '10.4' },
+  { code: '04010D02', desc: 'Pump 3/4 HP', model: 'Single Phase', hp: '3/4', flow: '12.7' },
+  { code: '04010D03', desc: 'Pump 1 HP', model: 'Single Phase', hp: '1', flow: '16.4' },
+  { code: '04010D04', desc: 'Pump 1 1/2 HP', model: 'Single Phase', hp: '1 1/2', flow: '21.3' },
+  { code: '04010D05', desc: 'Pump 2 HP', model: 'Single Phase', hp: '2', flow: '23.0' },
+  { code: '04010D06', desc: 'Pump 3 HP', model: 'Single Phase', hp: '3', flow: '27.0' },
 ];
 
 const lsmSpecs = [
@@ -72,10 +68,8 @@ export default function Accessories() {
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   const openSchematic = (type: string) => {
-    // In a real app, these would be specific high-res images
     const images: Record<string, string> = {
-      pump: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80',
-      filter: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80' // Placeholder for technical drawings
+      pump: '/images/services/accessories/pump-performance-curve.png'
     };
     setModalImage(images[type]);
   };
@@ -116,7 +110,7 @@ export default function Accessories() {
               </ul>
             </div>
             
-            <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=1200&q=80" alt="Pool Ladder" className="w-full h-80 object-cover rounded-xl" />
+            <img src={IMAGES.services.accessoriesLadder} alt="Pool Ladder" className="w-full h-80 object-cover rounded-xl" />
           </motion.div>
         );
 
@@ -185,7 +179,7 @@ export default function Accessories() {
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-2xl font-medium text-slate-900 dark:text-slate-100">The Marathon Pump Series</h3>
+              <h3 className="text-2xl font-medium text-slate-900 dark:text-slate-100">The Pump Series</h3>
               <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-light max-w-4xl">
                 A heavy-duty, self-priming pump designed to operate flawlessly under a vast array of conditions.
               </p>
@@ -194,7 +188,7 @@ export default function Accessories() {
                 {[
                   { title: 'Durable & Certified', desc: 'TUV GS Certified and rigorously pressure-tested prior to shipment.' },
                   { title: 'Easy Maintenance', desc: 'Features a see-through lid, a large strainer, and easy-to-remove drain plugs for fast winterization.' },
-                  { title: 'Versatile Power', desc: 'Available from ½ HP up to 3 HP.' },
+                  { title: 'Versatile Power', desc: 'Available from ½ HP up to 2 HP.' },
                   { title: 'Custom Upgrades', desc: 'Options available for a 316SS shaft (ideal for saltwater pools), 230V/60Hz motors, and international connections.' }
                 ].map((feature, i) => (
                    <div key={i} className="flex flex-col">
@@ -206,7 +200,7 @@ export default function Accessories() {
             </div>
 
             <div>
-               <h4 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Marathon Pump Specifications</h4>
+               <h4 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Pump Specifications</h4>
                <TechnicalTable 
                  headers={['Code', 'Description', 'Model', 'HP', 'Flow (m³/h)']}
                  data={marathonSpecs}
@@ -300,15 +294,7 @@ export default function Accessories() {
                />
             </div>
 
-            <div>
-              <button 
-                onClick={() => openSchematic('filter')}
-                className="inline-flex items-center space-x-2 text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-slate-900 dark:hover:border-white px-8 py-4 transition-colors rounded-sm"
-              >
-                <span>View Technical Schematics</span>
-                <ExternalLink className="w-4 h-4 text-cyan-600 dark:text-brand-gold" />
-              </button>
-            </div>
+
           </motion.div>
         );
 

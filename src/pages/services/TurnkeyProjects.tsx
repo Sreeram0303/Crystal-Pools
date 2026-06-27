@@ -1,6 +1,5 @@
-﻿import { motion } from 'motion/react';
-import { Compass, Droplets, PenTool, Wrench, Settings, RotateCcw, MapPin, RefreshCw } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
+import { motion } from 'motion/react';
+import { Compass, Droplets, PenTool, Wrench, Settings, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES } from '../../config/images';
 
@@ -42,14 +41,6 @@ export default function TurnkeyProjects() {
       dotColor: "text-amber-400"
     },
     {
-      title: "Finishing",
-      description: "Premium mosaics and luxurious accessories.",
-      icon: PenTool,
-      color: "text-green-500",
-      borderColor: "border-green-400",
-      dotColor: "text-green-400"
-    },
-    {
       title: "Filtration",
       description: "Energy-efficient treatment and sanitation.",
       icon: Droplets,
@@ -64,6 +55,14 @@ export default function TurnkeyProjects() {
       color: "text-blue-500",
       borderColor: "border-blue-400",
       dotColor: "text-blue-400"
+    },
+    {
+      title: "Finishing",
+      description: "Premium mosaics and luxurious accessories.",
+      icon: PenTool,
+      color: "text-green-500",
+      borderColor: "border-green-400",
+      dotColor: "text-green-400"
     },
     {
       title: "Support",
@@ -145,30 +144,6 @@ export default function TurnkeyProjects() {
           </div>
         </div>
 
-        {/* Bottom badge strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="absolute inset-x-0 bottom-0 z-20 px-8 sm:px-14 md:px-20 lg:px-28 pb-8 md:pb-10"
-        >
-          <div className="flex items-center divide-x divide-white/20">
-            {[
-              { icon: PenTool,   label: 'Design &\nEngineering' },
-              { icon: Wrench,    label: 'Construction\nExcellence' },
-              { icon: RefreshCw, label: 'Lifecycle\nSupport' },
-              { icon: MapPin,    label: 'Pan India\nPresence' },
-            ].map(({ icon: Icon, label }, i) => (
-              <div key={i} className="flex items-center gap-3 px-5 first:pl-0">
-                <Icon className="w-5 h-5 text-[#f9c80e] shrink-0 stroke-[1.5]" />
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white/80 whitespace-pre-line leading-tight">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Scroll cue */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center opacity-0 pointer-events-none" />
       </section>
@@ -184,7 +159,7 @@ export default function TurnkeyProjects() {
                 <span className="font-serif italic text-cyan-700 dark:text-brand-gold font-normal">Unifying Expertise, Eliminating Complexity.</span>
               </h2>
               <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-md">
-                Why navigate the complexities of multiple vendors for your aquatic vision when you can partner with a single, reliable entity? Crystal Pools offers integrated, turnkey solutions that eliminate multivendor dependency. By choosing an end-to-end partnership, we optimize every facet of your project.
+                Instead of navigating the complexities of multiple vendors for your aquatic vision, you can partner with a single, reliable entity. Crystal Pools offers integrated, turnkey solutions that eliminate multivendor dependency. By choosing an end-to-end partnership, we optimize every facet of your project.
                 <br /><br />
                 Our integrated approach directly leads to:
               </p>

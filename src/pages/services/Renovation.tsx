@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { ArrowRight, Palette, Zap, Shield, CheckCircle } from 'lucide-react';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { Link } from 'react-router-dom';
@@ -230,7 +230,7 @@ export default function Renovation() {
           transition={{ duration: 1 }}
           className="max-w-3xl mx-auto"
         >
-          <p className="text-xs tracking-[0.3em] uppercase font-bold text-[#f9c80e] mb-6">Ready to begin?</p>
+          <p className="text-xs tracking-[0.3em] uppercase font-bold text-[#f9c80e] mb-6">Ready to begin</p>
           <h2 className="text-4xl md:text-6xl font-display font-light text-[#0a5c86] dark:text-white tracking-tight mb-12 leading-tight">
             Give Your Pool the<br />
             <span className="font-serif italic text-[#f9c80e]">Renewal It Deserves.</span>

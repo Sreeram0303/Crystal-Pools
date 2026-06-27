@@ -1,8 +1,24 @@
 node_modules/
 build/
 dist/
+app/
 coverage/
 .DS_Store
 *.log
 .env*
 !.env.example
+
+# Backup / numbered duplicates
+*-1.html
+*-1.json
+*-1.ts
+*,*.ts
+-1.gitignore
+,env-1.example
+
+# Dev & test scripts
+test-*.js
+test-*.cjs
+testrun.js
+modify_pages.*
+server2.ts

@@ -1,7 +1,7 @@
-﻿import { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { motion } from 'motion/react';
-import { ArrowUp, Cloud, Bell, Aperture, Droplets, ArrowDown } from 'lucide-react';
+import { ArrowUp, Cloud, Bell, Aperture, Droplets, ArrowDown, Activity, Layers, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES } from '../../config/images';
 
@@ -41,6 +41,24 @@ const signatureCollection = [
     description: "Delivering a seamless, cascading sheet of water, these features serve as stunning spatial dividers or focal points, blending ambient sound with captivating modern design.",
     icon: ArrowDown,
     image: IMAGES.waterFeatures.curtains,
+  },
+  {
+    title: "Laminar Jumping Jets",
+    description: "Creating a flawless, glass-like rod of water that arched gracefully into the air, these jets add a dramatic, interactive element with optional RGB lighting synchronization.",
+    icon: Activity,
+    image: IMAGES.waterFeatures.laminar,
+  },
+  {
+    title: "Tiered Cascade Fountains",
+    description: "A testament to classic architectural beauty, cascading tiered fountains produce a rich, highly visible water flow that significantly enhances the prestige of grand entrances.",
+    icon: Layers,
+    image: IMAGES.waterFeatures.tiered,
+  },
+  {
+    title: "Floating Musical Fountains",
+    description: "Perfect for lakes and large water bodies, these dynamic floating systems offer fully choreographed displays, synchronizing soaring water patterns with majestic music and light.",
+    icon: Music,
+    image: IMAGES.waterFeatures.musical,
   },
 ];
 

@@ -1,75 +1,86 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import type { FC } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+import { motion, useScroll, useTransform, useMotionValue, MotionValue } from 'motion/react';
 
 interface AnimatedTextRevealProps {
   text: string;
   className?: string;
   containerClassName?: string;
+  // Legacy props kept so existing callers don't break — no longer used
   initialBlur?: number;
   initialOpacity?: number;
 }
 
-export default function AnimatedTextReveal({ 
-  text, 
-  className = "", 
-  containerClassName = "py-8",
-  initialBlur = 10,
-  initialOpacity = 0.1
+export default function AnimatedTextReveal({
+  text,
+  className = '',
+  containerClassName = 'py-8',
 }: AnimatedTextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 85%", "end 50%"] 
+    offset: ['start 85%', 'end 50%'],
   });
 
-  const words = text.split(" ");
+  const totalChars = text.length;
+
+  // Maps scroll progress → character index across the full text
+  const cursorRaw = useTransform(scrollYProgress, [0, 1], [0, totalChars]);
+
+  // Ratchet: cursor only ever moves forward so typed characters never disappear
+  // when the user scrolls back up.
+  const cursor = useMotionValue(cursorRaw.get());
+
+  useEffect(() => {
+    const unsub = cursorRaw.on('change', (v) => {
+      if (v > cursor.get()) cursor.set(v);
+    });
+    return unsub;
+  }, [cursorRaw, cursor]);
+
+  // Split into words; track each word's start index in the full string
+  const words = text.split(' ');
+  let charIndex = 0;
 
   return (
     <div ref={containerRef} className={`relative ${containerClassName}`}>
-      <div className="flex flex-wrap top-[30vh] left-0 w-full">
-        <div className={className}>
-          {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + (1 / words.length);
-            return (
-              <Word 
-                key={i} 
-                word={word} 
-                progress={scrollYProgress} 
-                range={[start, end]} 
-                initialBlur={initialBlur}
-                initialOpacity={initialOpacity}
-              />
-            );
-          })}
-        </div>
+      <div className={className}>
+        {words.map((word, wi) => {
+          const wordStart = charIndex;
+          charIndex += word.length + (wi < words.length - 1 ? 1 : 0); // +1 for space
+
+          return (
+            // inline-block keeps each word from breaking across lines
+            <span key={wi} className="inline-block mr-[0.25em] mb-[0.1em]">
+              {word.split('').map((char, ci) => (
+                <Char
+                  key={ci}
+                  char={char}
+                  charIndex={wordStart + ci}
+                  cursor={cursor}
+                />
+              ))}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-const Word: FC<{ 
-  word: string; 
-  progress: MotionValue<number>; 
-  range: [number, number];
-  initialBlur: number;
-  initialOpacity: number;
-}> = ({ 
-  word, 
-  progress, 
-  range,
-  initialBlur,
-  initialOpacity
-}) => {
-  const opacity = useTransform(progress, range, [initialOpacity, 1]);
-  const blur = useTransform(progress, range, [initialBlur, 0]);
-  const filter = useTransform(blur, (v) => `blur(${v}px)`);
-  
+const Char: FC<{
+  char: string;
+  charIndex: number;
+  cursor: MotionValue<number>;
+}> = ({ char, charIndex, cursor }) => {
+  // Each character fades in over a very narrow cursor window (0.8 char-widths)
+  // giving a crisp typewriter appearance without any blur.
+  const opacity = useTransform(cursor, [charIndex, charIndex + 0.8], [0, 1]);
+
   return (
-    <motion.span className="inline-block mr-[0.25em] mb-[0.1em]" style={{ opacity, filter }}>
-      {word}
+    <motion.span className="inline" style={{ opacity }}>
+      {char}
     </motion.span>
   );
-}
+};

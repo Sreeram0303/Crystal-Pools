@@ -1,4 +1,4 @@
-﻿import { motion, useScroll, useTransform, type Variants } from "motion/react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import { usePageMeta } from '../hooks/usePageMeta';
 import { ShieldCheck, Handshake, Zap, Target, FileText, Download } from "lucide-react";
 import LeadershipCards from "../components/LeadershipCards";
@@ -157,20 +157,6 @@ export default function About() {
             {/* Cornerstone 1 */}
             <motion.div variants={fadeUpVariant} className="h-full">
               <GlowCard className="h-full">
-                <ShieldCheck className="w-12 h-12 text-[#06b6d4] mb-6 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="font-display text-2xl font-bold text-[#0a5c86] dark:text-white mb-4">
-                  Integrity
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Unwavering commitment to honesty and transparency in every
-                  client interaction and technical specification.
-                </p>
-              </GlowCard>
-            </motion.div>
-
-            {/* Cornerstone 2 */}
-            <motion.div variants={fadeUpVariant} className="h-full">
-              <GlowCard className="h-full">
                 <Handshake className="w-12 h-12 text-[#06b6d4] mb-6 group-hover:scale-110 transition-transform duration-300" />
                 <h3 className="font-display text-2xl font-bold text-[#0a5c86] dark:text-white mb-4">
                   Commitment
@@ -178,6 +164,20 @@ export default function About() {
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                   A relentless pursuit of perfection, ensuring every project is
                   delivered to the highest standards of excellence.
+                </p>
+              </GlowCard>
+            </motion.div>
+
+            {/* Cornerstone 2 */}
+            <motion.div variants={fadeUpVariant} className="h-full">
+              <GlowCard className="h-full">
+                <ShieldCheck className="w-12 h-12 text-[#06b6d4] mb-6 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="font-display text-2xl font-bold text-[#0a5c86] dark:text-white mb-4">
+                  Excellence
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Uncompromising quality in design, engineering, and execution. We pursue
+                  superior craftsmanship and innovative solutions in every aquatic project.
                 </p>
               </GlowCard>
             </motion.div>

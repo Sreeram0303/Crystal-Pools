@@ -125,7 +125,7 @@ export default function AnimatedRoutes() {
             <Route path="/gallery-swimming-pool-construction" element={<PageWrapper><Gallery /></PageWrapper>} />
             <Route path="/blog" element={<PageWrapper><Blog /></PageWrapper>} />
             <Route path="/contact-swimming-pool-contractor" element={<PageWrapper><Contact /></PageWrapper>} />
-<Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+            <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
           </Routes>
         </AnimatePresence>
       </Suspense>

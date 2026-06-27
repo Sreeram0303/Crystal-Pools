@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { IMAGES } from '../config/images';
@@ -46,7 +46,7 @@ const services = [
   },
   {
     num: '05',
-    category: 'Readymade Pools',
+    category: 'Readymade FRP Pools',
     title: 'Prefabricated',
     description: 'Uncompromising luxury delivered with unprecedented speed and efficiency.',
     path: '/services/readymade-pools',

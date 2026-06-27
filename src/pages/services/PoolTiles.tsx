@@ -1,4 +1,4 @@
-﻿import { Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { motion } from 'motion/react';
 import { IMAGES } from '../../config/images';

@@ -198,7 +198,7 @@ function FeatureRow({ features }: { features: Feature[] }) {
 }
 
 /** Single editorial advantage card */
-function AdvantageSection({ adv, index }: { adv: Advantage; index: number }) {
+function AdvantageSection({ adv, index }: { adv: Advantage; index: number; key?: React.Key }) {
   const isEven = index % 2 === 0;
 
   return (

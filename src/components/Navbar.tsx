@@ -47,7 +47,7 @@ const NAV_LINKS: NavLink[] = [
       { name: 'Vanishing Edge', subtitle: 'Swimming pools',    path: '/vanishing-edge-swimming-pools' },
       { name: 'Overflow Type',  subtitle: 'Swimming pools',    path: '/overflow-type-swimming-pools' },
       { name: 'Skimmer Type',   subtitle: 'Swimming pools',    path: '/skimmer-type-swimming-pools' },
-      { name: 'Readymade',      subtitle: 'Swimming pools',    path: '/readymade-swimming-pool' },
+      { name: 'Readymade FRP',      subtitle: 'Swimming pools',    path: '/readymade-swimming-pool' },
     ],
   },
   {
@@ -57,7 +57,7 @@ const NAV_LINKS: NavLink[] = [
       { name: 'Services Overview',    subtitle: 'Full project catalog',  path: '/services' },
       { name: 'Swimming pools',       subtitle: 'Turnkey projects',      path: '/services/turnkey-projects' },
       { name: 'Waterfall & fountain', subtitle: 'Water features',        path: '/services/waterfall-fountain' },
-      { name: 'Readymade pools',      subtitle: 'Prefabricated',         path: '/services/readymade-pools' },
+      { name: 'Readymade FRP pools',      subtitle: 'Prefabricated',         path: '/services/readymade-pools' },
       { name: 'Pool tiles',           subtitle: 'Glass mosaic',          path: '/services/pool-tiles' },
       { name: 'Accessories',          subtitle: 'Engineering equipment', path: '/services/accessories' },
       { name: 'Renovation',           subtitle: 'Repairs & maintenance', path: '/services/renovation' },
@@ -68,7 +68,7 @@ const NAV_LINKS: NavLink[] = [
     path: '/products',
     dropdown: [
       { name: 'Equipment Catalog',    subtitle: 'Pumps & Accessories', path: '/products' },
-      { name: 'Wellness & Specialty', subtitle: 'Installations',       path: '/products/specialty-installations' },
+      { name: 'Bathtubs & Jacuzzis', subtitle: 'Installations',       path: '/products/specialty-installations' },
     ],
   },
   { name: 'Gallery', path: '/gallery-swimming-pool-construction' },
@@ -198,12 +198,22 @@ export default function Navbar() {
 
   // Escape key closes the mobile panel
   useEffect(() => {
-    if (!mobileOpen) return;
+    if (!mobileOpen) {
+      document.body.style.overflow = '';
+      return;
+    }
+    
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { setMobileOpen(false); setExpandedSection(null); }
     };
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
   }, [mobileOpen]);
 
   // Focus trap: keep Tab/Shift+Tab inside the panel while it is open
@@ -273,13 +283,7 @@ export default function Navbar() {
 
       {/* ── Floating Pill Navbar ─────────────────────────────────────────── */}
       <div
-        className={`fixed left-1/2 -translate-x-1/2 z-[100] w-[95%] sm:w-[90%] md:w-[85%] lg:w-max max-w-[100vw] pointer-events-none transition-all duration-500 ease-in-out ${
-          mobileOpen || (isScrolled && !isHovered)
-            ? '-top-20 opacity-0'
-            : isScrolled && isHovered
-              ? 'top-2 sm:top-4 opacity-100'
-              : 'top-4 sm:top-6 opacity-100'
-        }`}
+        className={`fixed left-1/2 -translate-x-1/2 z-[100] w-max max-w-[95vw] pointer-events-none transition-all duration-500 ease-in-out top-4 sm:top-6 opacity-100`}
         style={{ perspective: 1000 }}
       >
         <motion.div
@@ -300,7 +304,7 @@ export default function Navbar() {
 
           {/* Desktop links — hidden below lg */}
           <div
-            className="hidden lg:flex items-center space-x-6 flex-1"
+            className="hidden lg:flex items-center space-x-6 flex-1 px-4 lg:px-0"
             style={{ transform: 'translateZ(20px)' }}
           >
             {NAV_LINKS.map((link) => (
@@ -402,10 +406,9 @@ export default function Navbar() {
       {/* ── Mobile / Tablet Menu Panel ───────────────────────────────────── */}
       {/*
           z-index stack:
-            pill navbar  → z-[100]   pill hides when submenu is open
-            panel        → z-[99]
-            backdrop     → z-[97]
-          Body scroll is NOT locked — only the panel scrolls independently.
+            pill navbar  → z-[100]
+            panel        → z-[102]
+            backdrop     → z-[101]
           When a dropdown is opened the pill hides and the panel shows a
           back-nav header so the user can return to the main list.
       */}
@@ -419,7 +422,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-[97] lg:hidden sm:block hidden bg-black/30 dark:bg-black/50 backdrop-blur-[2px]"
+              className="fixed inset-0 z-[101] lg:hidden bg-black/30 dark:bg-black/50 backdrop-blur-[2px]"
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
             />
@@ -436,7 +439,7 @@ export default function Navbar() {
               animate={{ x: '0%' }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="fixed top-0 right-0 h-[100svh] w-full sm:w-[340px] z-[99] lg:hidden flex flex-col bg-white dark:bg-[#060F1A] sm:border-l sm:border-gray-200 dark:sm:border-white/10"
+              className="fixed top-0 right-0 h-[100svh] w-full sm:w-[340px] z-[102] lg:hidden flex flex-col bg-white dark:bg-[#060F1A] sm:border-l sm:border-gray-200 dark:sm:border-white/10"
             >
               {/* ── Unified back-nav header ─────────────────────────────────
                   Always shown when the panel is open.

@@ -1,4 +1,4 @@
-﻿import { useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
@@ -40,7 +40,7 @@ const servicesData = [
   },
   {
     id: "readymade-pools",
-    title: "Readymade pools",
+    title: "Readymade FRP pools",
     description: "Prefabricated",
     image: IMAGES.services.readymadeHero,
     colSpanClass: "md:col-span-2 md:row-span-1",

@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { motion, AnimatePresence } from 'motion/react';
 import { Download, MessageCircle, X, ChevronRight, ShieldCheck, Settings2, Droplets, Headphones, Waves } from 'lucide-react';

@@ -1,4 +1,4 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TiltCard from './TiltCard';
@@ -25,7 +25,7 @@ const POOL_TYPES = [
   {
     id: 'competition-swimming-pools',
     title: 'COMPETITION SWIMMING POOLS',
-    desc: 'A pool may be referred to as fast or slow, depending on its physical layout. We build Olympic-grade pools with precise dimensions and wave-reducing gutters.',
+    desc: 'FINA-standard competition pools engineered for excellence. We build Olympic-grade pools with precise dimensions, wave-reducing gutters, and compliance with international competition standards.',
     img: '/images/pool-types/competition.jpg'
   },
   {

@@ -1,8 +1,10 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import AnimatedTextReveal from '../components/AnimatedTextReveal';
 import LiquidWaterEffect from '../components/LiquidWaterEffect';
 import { IMAGES } from '../config/images';
+import PoolFooterGallery from '../components/PoolFooterGallery';
+import { POOL_GALLERIES } from '../config/poolGalleries';
 import { usePageMeta } from '../hooks/usePageMeta';
 
 export default function OverflowTypeSwimmingPools() {
@@ -44,7 +46,7 @@ export default function OverflowTypeSwimmingPools() {
             className="max-w-lg pb-0 md:pb-4"
           >
             <p className="text-lg md:text-xl text-white font-medium drop-shadow-xl leading-relaxed">
-              As India’s trusted experts in advanced aquatic architecture, we bring over 25 years of pan-India experience to design superior perimeter-overflow pools that transform your space into a soothing, reflective sanctuary.
+              As India�s trusted experts in advanced aquatic architecture, we bring over 25 years of pan-India experience to design superior perimeter-overflow pools that transform your space into a soothing, reflective sanctuary.
             </p>
           </motion.div>
         </div>
@@ -69,7 +71,7 @@ export default function OverflowTypeSwimmingPools() {
             <div className="relative mb-12">
               <span className="absolute -top-12 -left-8 text-8xl text-cyan-500/20 font-serif z-10 hidden md:block">"</span>
               <AnimatedTextReveal 
-                text="Because surface water doesn’t have a chance to bounce off the walls, a perimeter-overflow pool possesses the calmest, most reflective surface—a true mirror on the ground."
+                text="Because surface water doesn't have a chance to bounce off the walls, a perimeter-overflow pool possesses the calmest, most reflective surface. A true mirror on the ground."
                 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-cyan-900 dark:text-white leading-relaxed"
                 containerClassName="py-0"
               />
@@ -133,36 +135,13 @@ export default function OverflowTypeSwimmingPools() {
         </div>
       </section>
 
-      {/* 4. Call to Action */}
-      <section className="py-32 px-4 sm:px-6 lg:px-8 bg-cyan-900 dark:bg-[#040B14] relative overflow-hidden flex items-center justify-center min-h-[600px]">
-        {/* Layer 1: Background Water Effect */}
-        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-          <LiquidWaterEffect />
-        </div>
-        <div className="absolute inset-0 bg-cyan-900/40 dark:bg-[#040B14]/60 mix-blend-multiply z-0" />
-
-        <div className="relative z-10 text-center max-w-4xl mx-auto pointer-events-auto">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-bold text-white mb-6">
-            Ready to Reflect <span className="font-serif italic text-[#f9c80e] font-normal">Perfection?</span>
-          </h2>
-          <p className="text-xl md:text-2xl text-cyan-100 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
-            Entrust Crystal Pools to take your commercial or residential property to the next level. Let's design an elegant overflow-type swimming pool that adds an aura of absolute serenity to your premises.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <div className="text-white text-lg">
-              <span className="font-light text-cyan-200 mr-2">Consult with an Overflow Pool Expert:</span>
-              <a href="tel:+919552526371" className="font-bold hover:text-[#f9c80e] transition-colors">
-                [+91 95525 26371 / 73]
-              </a>
-            </div>
-            <Link to="/contact-swimming-pool-contractor" className="px-8 py-4 bg-[#f9c80e] hover:bg-[#e0b40b] text-slate-900 font-bold uppercase tracking-widest text-sm rounded-full transition-all transform hover:scale-105 shadow-lg shadow-[#f9c80e]/20">
-              Get Your Overflow Pool Quote
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 4. Footer Gallery Section */}
+      <PoolFooterGallery 
+        images={POOL_GALLERIES.overflow} 
+        poolName="Overflow Design Pools" 
+      />
 
     </div>
   );
 }
+

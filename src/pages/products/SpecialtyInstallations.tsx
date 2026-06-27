@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Waves } from 'lucide-react';

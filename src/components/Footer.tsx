@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, Circle } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
 import Logo from './Logo';
 
 import ScrollToTopButton from './ScrollToTopButton';
@@ -121,16 +121,13 @@ export default function Footer() {
 
             <h4 className="text-sm tracking-wider mb-3 font-semibold uppercase text-white">Follow Us</h4>
             <div className="flex space-x-3">
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
+              <a href="https://www.instagram.com/crystalpoolspune/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
                 <Instagram size={16} />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
+              <a href="https://www.facebook.com/crystalpoolspune/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
                 <Facebook size={16} />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
-                <Twitter size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
+              <a href="https://www.linkedin.com/company/crystal-swimming-pools/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-500 hover:text-white transition-all transform hover:-translate-y-1">
                 <Linkedin size={16} />
               </a>
             </div>

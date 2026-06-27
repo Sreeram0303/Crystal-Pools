@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "Crystal Pools",
+  "description": "Swimming pool construction and supplies",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -1,4 +1,4 @@
-﻿import { useRef } from 'react';
+import { useRef } from 'react';
 import type { FC } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
 

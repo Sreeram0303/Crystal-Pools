@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 
 interface PageLoaderProps {
   onFillComplete?: () => void;
+  key?: React.Key;
 }
 
 export default function PageLoader({ onFillComplete }: PageLoaderProps) {
@@ -14,21 +15,21 @@ export default function PageLoader({ onFillComplete }: PageLoaderProps) {
       onFillComplete?.();
       return;
     }
-    // 1. Initial State: Blank for 300ms
-    const t1 = setTimeout(() => setPhase(1), 300);
+    // 1. Initial State: Blank for 200ms
+    const t1 = setTimeout(() => setPhase(1), 200);
     
     // 2. Transition Out: Phase 2 begins to hide "EST YEAR"
-    const t2 = setTimeout(() => setPhase(2), 1500);
+    const t2 = setTimeout(() => setPhase(2), 1000);
     
     // 3. Phase 3: Brand Reveal
-    const t3 = setTimeout(() => setPhase(3), 2000);
+    const t3 = setTimeout(() => setPhase(3), 1400);
     
     // 4. Trigger completion so parent unmounts and triggers `exit` animation
     const t4 = setTimeout(() => {
         if (onFillComplete) {
             onFillComplete();
         }
-    }, 3800);
+    }, 2800);
 
     return () => {
       clearTimeout(t1);
@@ -64,7 +65,7 @@ export default function PageLoader({ onFillComplete }: PageLoaderProps) {
             className="absolute flex items-center justify-center"
           >
             <span className="text-sm md:text-base font-display text-slate-400 tracking-[0.4em] uppercase font-light">
-              EST 1993
+              EST 2000
             </span>
           </motion.div>
         )}
@@ -74,84 +75,37 @@ export default function PageLoader({ onFillComplete }: PageLoaderProps) {
             key="brand"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.0, ease: "easeOut" }}
             className="absolute flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8"
           >
             <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                    opacity: { duration: 1, ease: "easeOut" },
-                    scale: { duration: 1, ease: "easeOut" }
-                }}
-                className="w-16 h-16 md:w-24 md:h-24 relative flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
+                className="w-20 h-20 md:w-28 md:h-28 relative flex items-center justify-center"
             >
                 {/* Subtle reflection/glow under the logo */}
-                <div className="absolute -bottom-4 w-full h-3 bg-[#0a5c86]/10 blur-xl rounded-[100%] scale-x-150"></div>
-                <img src="/logo.png" alt="Crystal Pools" className="w-full h-full object-contain drop-shadow-xl relative z-10" />
+                <div className="absolute -bottom-4 w-full h-4 bg-[#0a5c86]/20 blur-xl rounded-[100%] scale-x-150"></div>
+                <img src="/logo.png" alt="Crystal Pools" className="w-full h-full object-contain relative z-10" />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, filter: "blur(4px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
               className="flex flex-col items-center md:items-start"
             >
-              <motion.div
-                className="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start mb-6 uppercase"
-                style={{ fontFamily: "'Itim', cursive" }}
-              >
-                <div className="flex text-yellow-500 font-bold drop-shadow-md">
-                  {"CRYSTAL".split("").map((char, index) => {
-                    const rotations = ['-rotate-2', 'rotate-2', '-rotate-1', 'rotate-1', '-rotate-3', 'rotate-3', '-rotate-2'];
-                    return (
-                      <motion.div 
-                        key={`c-${index}`} 
-                        initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ 
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 20,
-                          delay: 0.4 + (index * 0.08) 
-                        }}
-                        className={`w-10 h-10 md:w-16 md:h-16 text-3xl md:text-5xl border-4 border-current flex items-center justify-center mx-0.5 rounded-md bg-white shadow-sm ${rotations[index % rotations.length]}`}
-                      >
-                        {char}
-                      </motion.div>
-                    )
-                  })}
-                </div> 
-                <div className="flex text-[#0a5c86] font-bold drop-shadow-md">
-                  {"POOLS".split("").map((char, index) => {
-                    const rotations = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-3'];
-                    return (
-                      <motion.div 
-                        key={`p-${index}`} 
-                        initial={{ opacity: 0, scale: 0.5, rotate: 20 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ 
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 20,
-                          delay: 0.4 + (8 * 0.08) + (index * 0.08) 
-                        }}
-                        className={`w-10 h-10 md:w-16 md:h-16 text-3xl md:text-5xl border-4 border-current flex items-center justify-center mx-0.5 rounded-md bg-white shadow-sm ${rotations[index % rotations.length]}`}
-                      >
-                        {char}
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </motion.div>
+              <h1 className="text-3xl md:text-5xl font-display text-slate-800 tracking-wider mb-3 font-light uppercase">
+                Crystal <span className="text-brand-blue font-semibold">Pools</span>
+              </h1>
               
               {/* Progress Line Indicator */}
-              <div className="w-full h-0.5 bg-slate-200 relative overflow-hidden mt-2 rounded-full">
+              <div className="w-full h-[2px] bg-slate-100 relative overflow-hidden rounded-full">
                 <motion.div 
                   initial={{ x: "-100%" }}
                   animate={{ x: "0%" }}
-                  transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
-                  className="absolute inset-y-0 left-0 w-full bg-linear-to-r from-transparent via-[#38bdf8] to-[#0a5c86]"
+                  transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
+                  className="absolute inset-y-0 left-0 w-full bg-linear-to-r from-[#38bdf8] to-[#0a5c86]"
                 />
               </div>
             </motion.div>

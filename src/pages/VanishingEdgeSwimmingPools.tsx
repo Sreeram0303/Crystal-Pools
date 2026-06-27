@@ -1,8 +1,10 @@
-﻿import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import AnimatedTextReveal from '../components/AnimatedTextReveal';
 import LiquidWaterEffect from '../components/LiquidWaterEffect';
 import { IMAGES } from '../config/images';
+import PoolFooterGallery from '../components/PoolFooterGallery';
+import { POOL_GALLERIES } from '../config/poolGalleries';
 import { usePageMeta } from '../hooks/usePageMeta';
 
 export default function VanishingEdgeSwimmingPools() {
@@ -69,14 +71,14 @@ export default function VanishingEdgeSwimmingPools() {
             <div className="relative mb-12">
               <span className="absolute -top-12 -left-8 text-8xl text-cyan-500/20 font-serif z-10 hidden md:block">"</span>
               <AnimatedTextReveal 
-                text="How would you like to have a swimming pool that knows no boundaries, seamlessly blending into the sky, the ocean, or the hillside to inspire the Art of Lavish Living?"
+                text="Imagine a swimming pool that knows no boundaries, seamlessly blending into the sky, the ocean, or the hillside to inspire the Art of Lavish Living."
                 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-cyan-900 dark:text-white leading-relaxed"
                 containerClassName="py-0"
               />
             </div>
             
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 font-sans font-light leading-relaxed mb-8">
-              <span className="font-bold text-slate-900 dark:text-white">The Visual Illusion:</span> A vanishing edge pool—often referred to as a zero edge or infinity pool—is a masterful reflecting pool that produces the visual effect of water extending directly to the horizon. 
+              <span className="font-bold text-slate-900 dark:text-white">The Visual Illusion:</span> A vanishing edge pool, often referred to as a zero edge or infinity pool, is a masterful reflecting pool that produces the visual effect of water extending directly to the horizon. 
             </p>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 font-sans font-light leading-relaxed">
               This specialized category also encompasses perimeter overflow pools, where water flows over one or more edges flush with the decking, creating a seamless, mirror-like lake effect. The illusion is particularly awe-inspiring when the edge appears to merge with a larger body of water or a sweeping green hillside, making it a staple of exotic resorts and exclusive private estates.
@@ -128,35 +130,11 @@ export default function VanishingEdgeSwimmingPools() {
         </div>
       </section>
 
-      {/* 4. Call to Action */}
-      <section className="py-32 px-4 sm:px-6 lg:px-8 bg-cyan-900 dark:bg-[#040B14] relative overflow-hidden flex items-center justify-center min-h-[600px]">
-        {/* Layer 1: Background Water Effect */}
-        <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-          <LiquidWaterEffect />
-        </div>
-        <div className="absolute inset-0 bg-cyan-900/40 dark:bg-[#040B14]/60 mix-blend-multiply z-0" />
-
-        <div className="relative z-10 text-center max-w-4xl mx-auto pointer-events-auto">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-bold text-white mb-6">
-            Ready to Defy <span className="font-serif italic text-[#f9c80e] font-normal">Boundaries?</span>
-          </h2>
-          <p className="text-xl md:text-2xl text-cyan-100 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
-            Transform your plain-looking backyard or commercial property into a luxurious waterscape. Talk to us to know how the experts at Crystal Pools take vanishing edge pool design to the next level.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <div className="text-white text-lg">
-              <span className="font-light text-cyan-200 mr-2">Consult with a Specialty Pool Expert:</span>
-              <a href="tel:+919552526371" className="font-bold hover:text-[#f9c80e] transition-colors">
-                [+91 95525 26371] 
-              </a>
-            </div>
-            <Link to="/contact-swimming-pool-contractor" className="px-8 py-4 bg-[#f9c80e] hover:bg-[#e0b40b] text-slate-900 font-bold uppercase tracking-widest text-sm rounded-full transition-all transform hover:scale-105 shadow-lg shadow-[#f9c80e]/20">
-              Get Your Bespoke Infinity Pool Quote
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 4. Footer Gallery Section */}
+      <PoolFooterGallery 
+        images={POOL_GALLERIES.vanishingEdge} 
+        poolName="Vanishing Edge Pools" 
+      />
 
     </div>
   );

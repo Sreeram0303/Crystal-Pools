@@ -1,4 +1,4 @@
-﻿import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { useRef } from 'react';
 import { usePageMeta } from '../hooks/usePageMeta';
 

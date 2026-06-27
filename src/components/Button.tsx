@@ -1,4 +1,4 @@
-﻿import type { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
+import type { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 type Size    = 'sm' | 'md' | 'lg';
@@ -22,9 +22,10 @@ const SIZES: Record<Size, string> = {
 };
 
 // ── Button element ──────────────────────────────────────────────────────────
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   size?: Size;
+  className?: string;
   children: ReactNode;
 }
 
@@ -40,9 +41,13 @@ export function Button({ variant = 'primary', size = 'md', className = '', child
 }
 
 // ── Anchor element (same visual, renders <a>) ───────────────────────────────
-interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   variant?: Variant;
   size?: Size;
+  className?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
   children: ReactNode;
 }
 

@@ -1,4 +1,4 @@
-﻿import type { FC, ElementType } from 'react';
+import type { FC, ElementType } from 'react';
 import { 
   Building2, 
   Hotel,

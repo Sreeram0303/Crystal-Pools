@@ -1,4 +1,4 @@
-﻿import { useLayoutEffect, useState, type ChangeEvent, type SyntheticEvent } from 'react';
+import { useLayoutEffect, useState, type ChangeEvent, type SyntheticEvent } from 'react';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { motion } from 'motion/react';
 import { Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';

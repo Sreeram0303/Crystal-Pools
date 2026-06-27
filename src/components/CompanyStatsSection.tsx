@@ -1,8 +1,8 @@
-﻿import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useInView, useMotionValue, animate, useTransform } from 'motion/react';
 import LiquidBackground from './LiquidBackground';
 
-const ANIMATION_DURATION = 2.5;
+const ANIMATION_DURATION = 4.0;
 
 const RisingStat = ({ target, label, suffix = '', isInView }: { target: number, label: string, suffix?: string, isInView: boolean }) => {
   const count = useMotionValue(0);
@@ -13,21 +13,24 @@ const RisingStat = ({ target, label, suffix = '', isInView }: { target: number, 
     if (isInView) {
       animate(count, target, {
         duration: ANIMATION_DURATION,
-        ease: "linear",
+        ease: [0.25, 1, 0.5, 1], // Smooth ease-out
       });
     }
   }, [isInView, count, target]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 md:p-6 text-center group z-10 relative">
-      <div className="relative font-display font-bold text-5xl md:text-6xl lg:text-7xl tracking-tighter select-none flex justify-center w-full min-w-[150px]">
-        <motion.div 
-          className="text-white drop-shadow-md dark:drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]"
-        >
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.2 }}
+      className="flex flex-col items-center justify-center p-4 md:p-6 text-center group z-10 relative"
+    >
+      <div className="relative font-display font-bold text-5xl md:text-6xl lg:text-7xl tracking-tighter select-none flex justify-center w-full min-w-37.5">
+        <motion.div className="text-white drop-shadow-md dark:drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
           {formattedCount}
         </motion.div>
       </div>
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.5, duration: 0.8 }}
@@ -35,7 +38,7 @@ const RisingStat = ({ target, label, suffix = '', isInView }: { target: number, 
       >
         {label}
       </motion.p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -49,7 +52,7 @@ export default function CompanyStatsSection() {
     if (isInView) {
       const controls = animate(bgProgressMotion, 100, {
         duration: ANIMATION_DURATION,
-        ease: "linear"
+        ease: [0.25, 1, 0.5, 1], // Match the number easing
       });
       return () => controls.stop();
     }

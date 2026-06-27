@@ -10,7 +10,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Maintenance',
     author: 'Technical Team',
     date: 'Jan 15, 2025',
-    image: 'https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/services/renovation/1.png',
     featured: true,
   },
   {
@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Architecture',
     author: 'Design Dept',
     date: 'Feb 22, 2025',
-    image: 'https://images.unsplash.com/photo-1540544660406-6a69dacb2804?auto=format&fit=crop&w=800&q=80',
+    image: '/images/pool-types/vanishing-edge.png',
     featured: false,
   },
   {
@@ -34,7 +34,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Wellness',
     author: 'Wellness Expert',
     date: 'Mar 05, 2025',
-    image: 'https://images.unsplash.com/photo-1515362698717-36e65a0cbb0f?auto=format&fit=crop&w=800&q=80',
+    image: '/images/products/specialty-installations/sunbath/1.png',
     featured: false,
   },
   {
@@ -46,7 +46,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Technology',
     author: 'Technical Team',
     date: 'Apr 12, 2025',
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80',
+    image: '/images/products/equipment-catalogue/hero.png',
     featured: false,
   },
   {
@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Architecture',
     author: 'Design Dept',
     date: 'May 18, 2025',
-    image: 'https://images.unsplash.com/photo-1584486520270-19eca1ef3661?auto=format&fit=crop&w=800&q=80',
+    image: '/images/services/pool-tiles/hero.png',
     featured: false,
   },
 ];
