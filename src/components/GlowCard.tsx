@@ -58,7 +58,7 @@ export default function GlowCard({ children, className = "" }: GlowCardProps) {
       />
 
       {/* Content wrapper */}
-      <div className="relative h-full w-full rounded-2xl z-10 flex flex-col p-10">
+      <div className="relative h-full w-full rounded-2xl z-10 flex flex-col p-6 sm:p-8 md:p-10">
         {children}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/
 
 const journeyData = [
   {
-    year: "1998",
+    year: "2000",
     title: "The Foundation",
     description: "Nilesh Shukla laid the foundation of Crystal Pools with a vision to redefine aquatic architecture.",
     position: 0.1 // Keeping position for animation triggering relative to progress
@@ -28,7 +28,7 @@ const journeyData = [
     position: 0.7
   },
   {
-    year: "2024",
+    year: "2026",
     title: "Expanding Horizons",
     description: "Sarthak Shukla leads the next phase of global expansion and sustainable innovations.",
     position: 0.9
@@ -53,13 +53,13 @@ const Milestone: FC<{
   const glowOpacity = useTransform(scrollYProgress, [activateStart, activateEnd], [0, 1]);
 
   return (
-    <div className="relative w-full flex items-center justify-center min-h-[250px] py-12 md:py-20 group">
-      
+    <div className="relative w-full flex items-center justify-center min-h-[200px] sm:min-h-[250px] py-8 sm:py-12 md:py-20 group">
+
       {/* Central Node / Dot */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-20">
+      <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 flex items-center justify-center z-20">
         {/* Idle muted dot */}
         <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 transition-colors" />
-        
+
         {/* Activated glowing dot */}
         <motion.div
            style={{ scale, opacity: glowOpacity }}
@@ -73,12 +73,22 @@ const Milestone: FC<{
         />
       </div>
 
-      {/* Grid Layout Container */}
-      <div className="w-full max-w-5xl mx-auto flex">
+      {/* Mobile: single-side column, content always to the right of the left-aligned dot */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="sm:hidden w-full flex flex-col items-start text-left pl-11 pr-4"
+      >
+        <span className="text-sm font-bold text-cyan-600 dark:text-brand-gold tracking-widest uppercase">{year}</span>
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">{title}</h3>
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-1">{description}</p>
+      </motion.div>
+
+      {/* sm and up: Grid Layout Container with alternating left/right columns */}
+      <div className="hidden sm:flex w-full max-w-5xl mx-auto">
         {/* Left Column */}
         <div className="w-1/2 flex justify-end">
           {isLeft && (
-            <motion.div 
+            <motion.div
               style={{ opacity: contentOpacity, y: contentY }}
               className="flex flex-col items-end text-right pr-8 md:pr-16 max-w-xs md:max-w-sm"
             >
@@ -88,11 +98,11 @@ const Milestone: FC<{
             </motion.div>
           )}
         </div>
-        
+
         {/* Right Column */}
         <div className="w-1/2 flex justify-start">
           {!isLeft && (
-            <motion.div 
+            <motion.div
               style={{ opacity: contentOpacity, y: contentY }}
               className="flex flex-col items-start text-left pl-8 md:pl-16 max-w-xs md:max-w-sm"
             >
@@ -180,11 +190,11 @@ export default function OurJourney() {
       <div ref={trackRef} className="relative w-full max-w-6xl mx-auto z-10 px-4 md:px-8">
         
         {/* Central Base Line */}
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-slate-200 dark:bg-slate-800" />
+        <div className="absolute top-0 bottom-0 left-4 sm:left-1/2 -translate-x-1/2 w-0.5 bg-slate-200 dark:bg-slate-800" />
 
         {/* Caustic Light Sweep */}
-        <motion.div 
-          className="absolute left-1/2 -translate-x-1/2 w-[300px] h-[40vh] max-h-[500px] pointer-events-none z-0 opacity-80"
+        <motion.div
+          className="absolute left-4 sm:left-1/2 -translate-x-1/2 w-[150px] sm:w-[300px] h-[40vh] max-h-[500px] pointer-events-none z-0 opacity-80"
           style={{ top: lightPosition, y: "-50%", opacity: lightOpacity, scale: lightScale }}
         >
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-cyan-400/30 dark:via-amber-400/30 to-transparent blur-2xl rounded-full transform scale-x-50"></div>

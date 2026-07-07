@@ -1,42 +1,43 @@
-import type { FC, ElementType } from 'react';
-import { 
-  Building2, 
-  Hotel,
-  Home,
-  MapPin,
-  Castle,
-  Tent,
-  Trees,
-  Warehouse,
-  Landmark,
-  Palmtree
-} from 'lucide-react';
+import type { FC } from 'react';
+import { IMAGES } from '../config/images';
 
 const topRowLogos = [
-  { id: 1, Icon: Building2, name: 'Marriott' },
-  { id: 2, Icon: Hotel, name: 'Hilton' },
-  { id: 3, Icon: Landmark, name: 'Taj Hotels' },
-  { id: 4, Icon: Home, name: 'Ritz-Carlton' },
-  { id: 5, Icon: Castle, name: 'Oberoi' },
+  { id: 1, src: IMAGES.clients.gera, name: 'Gera' },
+  { id: 2, src: IMAGES.clients.anantiEstate, name: 'Ananti Estate Developer & Builder' },
+  { id: 3, src: IMAGES.clients.amanoraParkTown, name: 'Amanora Park Town' },
+  { id: 4, src: IMAGES.clients.prajayEngineerSyndicate, name: 'Prajay Engineer Syndicate' },
+  { id: 5, src: IMAGES.clients.leverageGreens, name: 'Leverage Greens' },
+  { id: 6, src: IMAGES.clients.sanskritiSchoolPune, name: 'Sanskriti School Pune' },
+  { id: 7, src: IMAGES.clients.csbSankalp, name: 'CSB Sankalp Builders & Developers' },
+  { id: 8, src: IMAGES.clients.reliance, name: 'Reliance' },
+  { id: 9, src: IMAGES.clients.prabhaveeGroup, name: 'Prabhavee Group' },
+  { id: 10, src: IMAGES.clients.paranjapeSchemes, name: 'Paranjape Schemes' },
+  { id: 11, src: IMAGES.clients.paramountBuilders, name: 'Paramount Builders & Developers' },
 ];
 
 const bottomRowLogos = [
-  { id: 6, Icon: Tent, name: 'Club Mahindra' },
-  { id: 7, Icon: Trees, name: 'Four Seasons' },
-  { id: 8, Icon: Warehouse, name: 'Hyatt' },
-  { id: 9, Icon: MapPin, name: 'ITC Hotels' },
-  { id: 10, Icon: Landmark, name: 'Leela Palaces' },
+  { id: 12, src: IMAGES.clients.oceanParkResort, name: 'The Ocean Park Resort' },
+  { id: 13, src: IMAGES.clients.namrataOmkar, name: 'Namrata Construction / Omkar Group' },
+  { id: 14, src: IMAGES.clients.matrixConstruction, name: 'Matrix Construction' },
+  { id: 15, src: IMAGES.clients.hornbillResort, name: 'Hornbill Deluxe Hill Resort' },
+  { id: 16, src: IMAGES.clients.utsavHomes, name: 'Utsav Homes' },
+  { id: 17, src: IMAGES.clients.kRahejaCorp, name: 'K Raheja Corp' },
+  { id: 18, src: IMAGES.clients.renukaDevelopers, name: 'Renuka Developers' },
+  { id: 19, src: IMAGES.clients.dorleGroup, name: 'Dorle Group' },
+  { id: 20, src: IMAGES.clients.karandiValley, name: 'Karandi Valley' },
+  { id: 21, src: IMAGES.clients.samudraSairCottage, name: 'Samudra Sair Cottage' },
+  { id: 22, src: IMAGES.clients.sanjayGhodawatGroup, name: 'Sanjay Ghodawat Group' },
 ];
 
-const LogoCard: FC<{ Icon: ElementType, name: string }> = ({ Icon, name }) => {
+const LogoCard: FC<{ src: string, name: string }> = ({ src, name }) => {
   return (
-    <div className="flex items-center space-x-3 px-12 py-6 cursor-pointer group transition-all duration-300">
-      <div className="flex items-center space-x-3 opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
-        <Icon className="w-8 h-8 text-[#0a5c86] dark:text-white" />
-        <span className="text-xl font-display font-bold text-slate-800 dark:text-slate-300 tracking-tight whitespace-nowrap">
-          {name}
-        </span>
-      </div>
+    <div className="flex items-center px-10 py-6 cursor-pointer group transition-all duration-300">
+      <img
+        src={src}
+        alt={name}
+        title={name}
+        className="h-20 w-auto max-w-[220px] object-contain transition-all duration-500 group-hover:scale-110"
+      />
     </div>
   );
 };
@@ -60,7 +61,7 @@ export default function EsteemedClientsSection() {
         <div className="flex overflow-hidden">
           <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
             {[...topRowLogos, ...topRowLogos, ...topRowLogos, ...topRowLogos].map((logo, index) => (
-              <LogoCard key={`top-${index}`} Icon={logo.Icon} name={logo.name} />
+              <LogoCard key={`top-${index}`} src={logo.src} name={logo.name} />
             ))}
           </div>
         </div>
@@ -69,7 +70,7 @@ export default function EsteemedClientsSection() {
         <div className="flex overflow-hidden">
           <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused]">
              {[...bottomRowLogos, ...bottomRowLogos, ...bottomRowLogos, ...bottomRowLogos].map((logo, index) => (
-              <LogoCard key={`bottom-${index}`} Icon={logo.Icon} name={logo.name} />
+              <LogoCard key={`bottom-${index}`} src={logo.src} name={logo.name} />
             ))}
           </div>
         </div>

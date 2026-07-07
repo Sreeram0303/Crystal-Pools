@@ -88,7 +88,7 @@ export default function ContactMap() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative w-full h-[350px] lg:h-[380px] bg-slate-100 dark:bg-[#0a121a] rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 flex items-center justify-center overflow-hidden z-0 p-2 lg:max-w-[100%]"
+            className="relative w-full h-[280px] sm:h-[350px] lg:h-[380px] bg-slate-100 dark:bg-[#0a121a] rounded-3xl shadow-xl border border-slate-100 dark:border-slate-800 flex items-center justify-center overflow-hidden z-0 p-2 lg:max-w-[100%]"
           >
             <MapContainer 
               center={[20.0, 74.0]} 
@@ -136,7 +136,7 @@ export default function ContactMap() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative w-full h-[350px] lg:h-[380px]"
+            className="relative w-full h-[280px] sm:h-[350px] lg:h-[380px]"
           >
             <div className="w-full h-full rounded-3xl p-8 flex flex-col justify-center items-center text-center border border-slate-200 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] overflow-hidden bg-white dark:bg-[#08121d]">
               {activeLocation && (
