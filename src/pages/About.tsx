@@ -242,14 +242,14 @@ export default function About() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-white dark:bg-slate-800 flex items-center justify-center p-12 border border-slate-200 dark:border-white/10"
+              className="relative min-h-[260px] sm:aspect-video rounded-2xl shadow-xl bg-white dark:bg-slate-800 flex items-center justify-center p-6 sm:p-10 md:p-12 border border-slate-200 dark:border-white/10"
             >
               <div className="text-center">
-                <div className="w-20 h-20 bg-[#0a5c86]/10 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <FileText size={40} className="text-[#0a5c86] dark:text-brand-gold" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#0a5c86]/10 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                  <FileText size={36} className="text-[#0a5c86] dark:text-brand-gold sm:w-10 sm:h-10" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2 text-slate-800 dark:text-white">Technical Specifications</h3>
-                <p className="text-slate-500 dark:text-slate-400">Detailed insights into our construction processes and quality benchmarks.</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-slate-800 dark:text-white">Technical Specifications</h3>
+                <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">Detailed insights into our construction processes and quality benchmarks.</p>
               </div>
             </motion.div>
           </div>

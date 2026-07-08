@@ -46,15 +46,15 @@ const HexagonCard: FC<{ item: typeof whyChooseUsData[0]; index: number }> = ({ i
       style={{ filter: 'drop-shadow(0px 10px 30px rgba(6, 15, 26, 0.08))' }}
       className="group"
     >
-      <div 
-        className="w-[280px] h-[244px] bg-white dark:bg-[#0b1627] flex flex-col items-center justify-center p-8 transition-transform duration-300 group-hover:-translate-y-2 relative"
+      <div
+        className="w-[230px] h-[200px] sm:w-[260px] sm:h-[227px] md:w-[280px] md:h-[244px] bg-white dark:bg-[#0b1627] flex flex-col items-center justify-center p-5 sm:p-6 md:p-8 transition-transform duration-300 group-hover:-translate-y-2 relative"
         style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)' }}
       >
-        <div className="w-14 h-14 rounded-full bg-cyan-50 dark:bg-cyan-900/30 flex items-center justify-center mb-5 transition-colors group-hover:bg-brand-gold/10">
-          <Icon className="text-brand-gold w-6 h-6" />
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-cyan-50 dark:bg-cyan-900/30 flex items-center justify-center mb-3 sm:mb-5 transition-colors group-hover:bg-brand-gold/10">
+          <Icon className="text-brand-gold w-5 h-5 sm:w-6 sm:h-6" />
         </div>
-        <h3 className="font-sans font-bold text-slate-900 dark:text-white mb-2 text-center text-lg">{item.title}</h3>
-        <p className="text-[13px] text-slate-500 dark:text-slate-400 text-center leading-relaxed">
+        <h3 className="font-sans font-bold text-slate-900 dark:text-white mb-2 text-center text-base sm:text-lg">{item.title}</h3>
+        <p className="text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 text-center leading-relaxed">
           {item.description}
         </p>
       </div>

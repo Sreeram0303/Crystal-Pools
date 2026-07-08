@@ -24,6 +24,20 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const EMPTY_FORM: FormFields = { name: '', email: '', phone: '', projectType: '', message: '' };
 
+const WHATSAPP_NUMBER = '919552526371';
+
+function buildWhatsAppMessage(f: FormFields): string {
+  const lines = [
+    'New Pool Inquiry',
+    `Name: ${f.name}`,
+    `Email: ${f.email}`,
+    f.phone && `Phone: ${f.phone}`,
+    `Project Type: ${f.projectType}`,
+    `Message: ${f.message}`,
+  ].filter(Boolean);
+  return lines.join('\n');
+}
+
 function validate(f: FormFields): Partial<Record<keyof FormFields, string>> {
   const errors: Partial<Record<keyof FormFields, string>> = {};
   if (!f.name.trim())                          errors.name        = 'Full name is required.';
@@ -63,6 +77,12 @@ export default function Contact() {
     if (Object.keys(fieldErrors).length > 0) { setErrors(fieldErrors); return; }
 
     setStatus('submitting');
+
+    // Open WhatsApp synchronously, still inside the click's event handler, so
+    // browsers don't treat it as a blocked popup once the fetch below resolves.
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(fields))}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -197,7 +217,7 @@ export default function Contact() {
                   <CheckCircle className="w-14 h-14 text-emerald-400" />
                   <h4 className="text-xl font-display font-bold text-white">Inquiry Sent!</h4>
                   <p className="text-cyan-100 text-sm font-light max-w-xs">
-                    Thank you — our team will get back to you within 24 hours.
+                    Thank you — our team will get back to you within 24 hours. We've also opened WhatsApp so you can send us your inquiry there too.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
@@ -228,7 +248,7 @@ export default function Contact() {
                         aria-invalid={!!errors.name}
                         aria-describedby={errors.name ? 'name-error' : undefined}
                         className={`w-full px-5 py-3.5 rounded-2xl border bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all outline-none shadow-sm ${errors.name ? 'border-red-400/60' : 'border-white/20'}`}
-                        placeholder="John Doe"
+                        placeholder="Enter your full name"
                       />
                       {errors.name && <p id="name-error" className="mt-1 text-xs text-red-300">{errors.name}</p>}
                     </div>
@@ -243,7 +263,7 @@ export default function Contact() {
                         aria-invalid={!!errors.email}
                         aria-describedby={errors.email ? 'email-error' : undefined}
                         className={`w-full px-5 py-3.5 rounded-2xl border bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all outline-none shadow-sm ${errors.email ? 'border-red-400/60' : 'border-white/20'}`}
-                        placeholder="john@example.com"
+                        placeholder="Enter your email address"
                       />
                       {errors.email && <p id="email-error" className="mt-1 text-xs text-red-300">{errors.email}</p>}
                     </div>
@@ -261,7 +281,7 @@ export default function Contact() {
                         aria-invalid={!!errors.phone}
                         aria-describedby={errors.phone ? 'phone-error' : undefined}
                         className={`w-full px-5 py-3.5 rounded-2xl border bg-white/5 text-white placeholder-white/40 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all outline-none shadow-sm ${errors.phone ? 'border-red-400/60' : 'border-white/20'}`}
-                        placeholder="+91 98765 43210"
+                        placeholder="Enter your phone number"
                       />
                       {errors.phone && <p id="phone-error" className="mt-1 text-xs text-red-300">{errors.phone}</p>}
                     </div>
