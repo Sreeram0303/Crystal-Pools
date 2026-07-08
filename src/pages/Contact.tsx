@@ -54,7 +54,7 @@ function validate(f: FormFields): Partial<Record<keyof FormFields, string>> {
 export default function Contact() {
   usePageMeta(
     'Contact Crystal Pools — Get a Free Quote',
-    'Reach out to Crystal Pools for luxury pool construction, renovation, and equipment across Pune, Mumbai, Nashik, and all India. Call or send an inquiry today.',
+    'Reach out to Crystal Pools for luxury pool construction, renovation, and equipment across Pune, Sindhudurg, Nashik, and all India. Call or send an inquiry today.',
   );
 
   const { hash } = useLocation();

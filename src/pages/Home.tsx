@@ -17,7 +17,7 @@ import { IMAGES } from '../config/images';
 export default function Home() {
   usePageMeta(
     'Premium Swimming Pool Construction',
-    "India's premier swimming pool constructor since 1993. Luxury private, commercial, and competition pools across Pune, Mumbai, Nashik, and beyond.",
+    "India's premier swimming pool constructor since 2000. Luxury private, commercial, and competition pools across Pune, Sindhudurg, Nashik, and beyond.",
   );
 
   const shouldReduceMotion = useReducedMotion();
