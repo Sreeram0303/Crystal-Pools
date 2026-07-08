@@ -76,7 +76,7 @@ export default function Footer() {
           <div>
             <h4 className="text-base tracking-wider mb-4 font-semibold uppercase text-white border-b border-cyan-500/30 pb-2 inline-block">Our Branches</h4>
             <ul className="grid grid-cols-2 gap-y-3 gap-x-2 text-[14px] text-slate-300 mb-6">
-              {['Pune', 'Mumbai', 'Nashik', 'Kolhapur', 'Rajasthan', 'Goa'].map(branch => (
+              {['Pune', 'Sindhudurg', 'Nashik', 'Kolhapur', 'Rajasthan', 'Goa'].map(branch => (
                 <li key={branch} className="flex items-center group cursor-default">
                   <MapPin size={14} className="mr-2 text-cyan-500/70 group-hover:text-cyan-400 transition-colors" />
                   <span className="group-hover:text-cyan-400 transition-colors">{branch}</span>

@@ -27,11 +27,18 @@ export function flexibleImages(): Plugin {
 
     // DEV: serve any image by stem name, ignoring the requested extension
     configureServer(server) {
+      const imagesRoot = path.resolve('public/images');
+
       server.middlewares.use((req, res, next) => {
         const url = req.url?.split('?')[0] ?? '';
         if (!url.startsWith('/images/')) return next();
 
-        const requested = path.join('public', url);
+        // Resolve and confine the path to public/images to prevent traversal
+        // outside it via `../` segments in the request URL.
+        const requested = path.resolve(imagesRoot, '.' + url.slice('/images'.length));
+        if (requested !== imagesRoot && !requested.startsWith(imagesRoot + path.sep)) {
+          return next();
+        }
         if (fs.existsSync(requested) && fs.statSync(requested).size > 0) return next();
 
         const dir  = path.dirname(requested);
